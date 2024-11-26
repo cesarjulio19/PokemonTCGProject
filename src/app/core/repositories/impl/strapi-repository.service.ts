@@ -58,11 +58,18 @@ export class StrapiRepositoryService<T extends Model> extends BaseRepositoryHttp
 
   override getAll(page:number, pageSize:number, filters:SearchParams = {}): Observable<T[] | Paginated<T>> {
     let search: string = Object.entries(filters)
-      .map(([k, v]) => `filters[${k}]=${v}`)
-      .reduce((p, v) => `${p}${v}`, "");
+  .map(([key, value]) => {
+    // Divide las claves por el punto (.) para identificar jerarquías
+    const keys = key.split('.');
+    // Construye el formato con corchetes (e.g., filters[set][id])
+    const formattedKey = keys.reduce((acc, curr) => `${acc}[${curr}]`, 'filters');
+    return `${formattedKey}=${value}`;
+  })
+  .join('&'); // Une los parámetros con '&'
+
     if(page!=-1){
       return this.http.get<PaginatedRaw<T>>(
-        `${this.apiUrl}/${this.resource}?pagination[page]=${page}&pagination[pageSize]=${pageSize}&${search}&populate=user,group,picture`, 
+        `${this.apiUrl}/${this.resource}?pagination[page]=${page}&pagination[pageSize]=${pageSize}&${search}&populate=user,set,card`, 
         this.getHeaders()).pipe(map(res=>{
           return this.mapping.getPaginated(page, pageSize, res.meta.pagination.total, res.data);
         }));

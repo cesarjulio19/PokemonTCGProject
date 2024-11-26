@@ -1,0 +1,11 @@
+<ion-item>
+  <ion-label>Set</ion-label>
+  <ion-select placeholder="All Cards" [(ngModel)]="selectedSetId" (ionChange)="onSetSelected($event)">
+    <ion-select-option [value]="-1">
+      All Cards
+    </ion-select-option>
+    <ion-select-option *ngFor="let set of (sets$ | async) " [value]="set.id">
+      {{ set.name }}
+    </ion-select-option>
+  </ion-select>
+</ion-item>

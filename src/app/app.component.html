@@ -1,3 +1,26 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <!-- Menú -->
+  <ion-menu #menu contentId="main-content" side="start">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item (click)="menu.close()" routerLink="/home" routerDirection="root">
+          Home
+        </ion-item>
+        <ion-item (click)="menu.close()" routerLink="/cards" routerDirection="root">
+          Cards
+        </ion-item>
+        <ion-item (click)="menu.close()"  (click)="logout()" button>
+          Cerrar Sesión
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Contenido principal -->
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>

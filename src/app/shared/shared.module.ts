@@ -3,19 +3,21 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { SetSelectorComponent } from './components/set-selector/set-selector.component';
 
 
 
 @NgModule({
-  declarations: [
+  declarations: [SetSelectorComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
     ReactiveFormsModule,
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    FormsModule
   ],
-  exports: [
+  exports: [SetSelectorComponent
   ]
 })
 export class SharedModule { }

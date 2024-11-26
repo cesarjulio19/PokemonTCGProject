@@ -39,6 +39,7 @@ export class RegisterPage {
             ...this.registerForm.value,
             userId: resp.id.toString()
           };
+          this.router.navigate(['/home'])
   
         },
         error: err => {
