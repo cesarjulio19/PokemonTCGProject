@@ -59,5 +59,6 @@ export interface Card extends Model {
   picture: string;
   type: string; 
   rarity: string; 
-  setId?: string; // ID del set al que pertenece
+  superType:string;
+  setId?: string; 
 }

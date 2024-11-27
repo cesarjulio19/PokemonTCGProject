@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { InfiniteScrollCustomEvent, SelectChangeEventDetail } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, ModalController, SelectChangeEventDetail } from '@ionic/angular';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Card } from 'src/app/core/models/card.model';
 import { Paginated } from 'src/app/core/models/paginated.model';
 import { Set } from 'src/app/core/models/set.model';
 import { CardsService } from 'src/app/core/services/impl/cards.service';
 import { SetsService } from 'src/app/core/services/impl/sets.service';
+import { CardModalComponent } from 'src/app/shared/components/card-modal/card-modal.component';
 
 @Component({
   selector: 'app-cards',
@@ -21,7 +22,8 @@ export class CardsPage implements OnInit {
   sets$:Observable<Set[]> = this._sets.asObservable();
 
   constructor(private cardsSvc:CardsService,
-    private setsSvc:SetsService,) { }
+    private setsSvc:SetsService,
+    private modalCtrl: ModalController ) { }
 
    currentPage: number = 1;
    pageSize: number = 25;
@@ -131,6 +133,14 @@ export class CardsPage implements OnInit {
     }
     
     
+  }
+
+  async openCardModal(card: Card) {
+    const modal = await this.modalCtrl.create({
+      component: CardModalComponent,
+      componentProps: { card },
+    });
+    await modal.present();
   }
 
   onIonInfinite(ev:InfiniteScrollCustomEvent) {

@@ -27,9 +27,10 @@ interface CardAttributes {
     name: string
     number: number
     image: string
-    set: SetRaw | number | null,
+    set: SetRaw | number | null
     type:string
     rarity:string
+    superType:string
     createdAt?: string
     updatedAt?: string
     publishedAt?: string
@@ -77,7 +78,9 @@ interface Meta {}
                 image:data.picture,
                 set:data.setId?Number(data.setId):null,
                 type:data.type,
-                rarity:data.rarity
+                rarity:data.rarity,
+                superType:data.superType
+
             }
         };
     }
@@ -125,6 +128,7 @@ interface Meta {}
             picture: attributes.image,
             rarity: attributes.rarity,
             type: attributes.type,
+            superType: attributes.superType,
             setId: typeof attributes.set === 'object' ? attributes.set?.data?.id.toString() : undefined,
 
         };

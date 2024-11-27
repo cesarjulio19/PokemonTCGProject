@@ -1,0 +1,30 @@
+.card-modal {
+    .modal-content {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+  
+      .card-info {
+        flex: 1;
+        padding-right: 20px;
+  
+        h2 {
+          margin-bottom: 10px;
+        }
+      }
+  
+      .card-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+  
+        img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 10px;
+        }
+      }
+    }
+}
