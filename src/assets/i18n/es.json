@@ -1,0 +1,66 @@
+{
+    "MENU": {
+    "TITLE": "Menú",
+    "HOME": "Inicio",
+    "CARDS": "Cartas",
+    "MYCARDS": "Mis Cartas",
+    "LOGOUT": "Cerrar sesión",
+    "PROFILE": "Perfil"
+    },
+
+    "MESSAGES": {
+        "INFINITE": "Cargando mas cartas..."
+    },
+
+    "LOGIN": {
+        "LOGIN": "Iniciar Sesión",
+        "REGISTER": "Regístrate",
+        "ACCOUNT": "¿No tienes cuenta?",
+        "ERRORS": {
+            "EMAIL_REQUIRED": "*Debe introducir un email",
+            "EMAIL_INCORRECT": "*Debe introducir un email correcto",
+            "PASSWORD_REQUIRED": "*Debe introducir una contraseña"
+        }
+    
+    },
+
+    "USER": {
+        "EMAIL" : "Email",
+        "PASSWORD": "Contraseña",
+        "NAME": "Nombre",
+        "SURNAME": "Apellidos",
+        "REPEAT_PASSWORD": "Repita contraseña"
+
+    },
+
+    "REGISTER": {
+        "NEW_ACCOUNT" : "Crear una cuenta",
+        "CREATE": "Crear Cuenta",
+        "ACCOUNT": "¿Tienes una cuenta?",
+        "ERRORS": {
+            "NAME_REQUIRED": "*Debe introducir su nombre",
+            "NAME_MIN_LENGTH": "*El nombre debe tener al menos dos caracteres",
+            "SURNAME_REQUIRED": "*Debe introducir su/s apellido/s",
+            "SURNAME_MIN_LENGTH": "*Su/s apellido/s debe/n tener al menos dos caracteres",
+            "EMAIL_REQUIRED": "*Debe introducir un email",
+            "EMAIL_INCORRECT": "*Debe introducir un email correcto",
+            "PASSWORD_REQUIRED": "*Debe introducir una contraseña",
+            "PASSWORD_INCORRECT": "*Al menos 8 caracteres, una mayúscula, una minúscula, un dígito y un caracter especial (&#64;$!%*?&.)",
+            "CONFIRM_PASSWORD": "*Las contraseñas no coinciden"
+        }
+    },
+
+    "SET_SELECTOR": {
+        "ALL_CARDS": "Todas Las Cartas",
+        "SET" : "Colección"
+    },
+
+    "CARD_MODAL": {
+        "NUMBER": "Número De La Colección:",
+        "TYPE": "Tipo Pokémon:",
+        "RARITY": "Rareza:",
+        "SUPERTYPE": "Tipo De La Carta:"
+    }
+
+
+}

@@ -8,6 +8,7 @@ import { CardsPageRoutingModule } from './cards-routing.module';
 
 import { CardsPage } from './cards.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     IonicModule,
     CardsPageRoutingModule,
-    SharedModule
+    SharedModule,
+    TranslateModule.forChild()
   ],
   declarations: [CardsPage]
 })

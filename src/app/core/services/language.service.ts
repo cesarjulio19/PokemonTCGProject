@@ -10,7 +10,7 @@ export class LanguageService {
 
   constructor(private translate: TranslateService) {
     translate.addLangs(['es', 'en']);
-    translate.setDefaultLang('es');
+    translate.setDefaultLang('en');
     
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang?.match(/es|en/) ? browserLang : 'es');

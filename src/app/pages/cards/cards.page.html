@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Cards</ion-title>
+    <ion-title>{{ 'MENU.CARDS' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -24,7 +24,7 @@
 
     <!-- Infinite Scroll -->
   <ion-infinite-scroll threshold="100px" (ionInfinite)="onIonInfinite($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more cards...">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText= " {{ 'MESSAGES.INFINITE' | translate }} ">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 

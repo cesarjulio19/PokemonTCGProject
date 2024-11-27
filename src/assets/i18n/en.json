@@ -1,0 +1,71 @@
+{
+    "MENU": {
+    "TITLE": "Menu",
+    "HOME": "Home",
+    "CARDS": "Cards",
+    "MYCARDS": "My Cards",
+    "LOGOUT": "Logout",
+    "PROFILE": "Profile"
+  },
+
+  "MESSAGES": {
+    "INFINITE": "Loading more cards..."
+  },
+
+  "LOGIN": {
+    "LOGIN": "Login",
+    "REGISTER": "Register",
+    "ACCOUNT": "Don't have an account?",
+    "ERRORS": {
+        "EMAIL_REQUIRED": "*You must enter an email",
+        "EMAIL_INCORRECT": "*You must enter a correct email",
+        "PASSWORD_REQUIRED": "*You must enter a password"
+    }
+
+  },
+
+  "USER": {
+    "EMAIL" : "Email",
+    "PASSWORD": "Password",
+    "NAME": "Name",
+    "SURNAME": "Surname",
+    "REPEAT_PASSWORD": "Repeat password"
+  },
+
+
+  "REGISTER": {
+    "NEW_ACCOUNT" : "Create an account",
+    "CREATE": "Create Account",
+    "ACCOUNT": "Do you have an account?",
+    "ERRORS": {
+        "NAME_REQUIRED": "*You must enter your name",
+        "NAME_MIN_LENGTH": "*The name must be at least two characters",
+        "SURNAME_REQUIRED": "*Surname is required",
+        "SURNAME_MIN_LENGTH": "Surname must be at least 2 characters long",
+        "EMAIL_REQUIRED": "*You must enter a correct email",
+        "EMAIL_INCORRECT": "*You must enter a correct email",
+        "PASSWORD_REQUIRED": "*You must enter a password",
+        "PASSWORD_INCORRECT": "*At least 8 characters, one uppercase letter, one lowercase letter, one digit and one special character (&#64;$!%*?&.)",
+        "CONFIRM_PASSWORD": "*Passwords do not match"
+    }
+},
+
+"SET_SELECTOR": {
+    "ALL_CARDS": "All Cards",
+    "SET" : "Set"
+},
+
+"CARD_MODAL": {
+    "NUMBER": "Set Number:",
+    "TYPE": "Pokémon Type:",
+    "RARITY": "Rarity:",
+    "SUPERTYPE": "Card Type:"
+}
+
+
+
+  
+
+
+
+}

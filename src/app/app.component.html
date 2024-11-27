@@ -3,22 +3,35 @@
   <ion-menu #menu contentId="main-content" side="start">
     <ion-header>
       <ion-toolbar>
-        <ion-title>Menu</ion-title>
+        <ion-title>{{ 'MENU.TITLE' | translate }}</ion-title>
+        <ion-fab slot="end">
+          <ion-fab-button size="small">
+            <ion-icon name="language-outline"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-list side="start">
+            <ion-fab-button (click)="changeLanguage('es')" [color]="currentLang === 'es' ? 'primary' : 'medium'">
+              <ion-text>ES</ion-text>
+            </ion-fab-button>
+            <ion-fab-button (click)="changeLanguage('en')" [color]="currentLang === 'en' ? 'primary' : 'medium'">
+              <ion-text>EN</ion-text>
+            </ion-fab-button>
+          </ion-fab-list>
+        </ion-fab>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
         <ion-item (click)="menu.close()" routerLink="/home" routerDirection="root">
-          Home
+          {{ 'MENU.HOME' | translate }}
         </ion-item>
         <ion-item (click)="menu.close()" routerLink="/cards" routerDirection="root">
-          Cards
+          {{ 'MENU.CARDS' | translate }}
         </ion-item>
         <ion-item (click)="menu.close()" routerLink="/my-cards" routerDirection="root">
-          My Cards
+          {{ 'MENU.MYCARDS' | translate }}
         </ion-item>
         <ion-item (click)="menu.close()"  (click)="logout()" button>
-          Cerrar Sesión
+          {{ 'MENU.LOGOUT' | translate }}
         </ion-item>
       </ion-list>
     </ion-content>

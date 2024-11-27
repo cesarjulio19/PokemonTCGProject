@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BaseAuthenticationService } from './core/services/impl/base-authentication.service';
 import { Router } from '@angular/router';
+import { LanguageService } from './core/services/language.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,20 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
+  currentLang: string;
+
   constructor(public authSvc: BaseAuthenticationService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private languageService: LanguageService,
+  ) {
+    this.currentLang = this.languageService.getStoredLanguage();
+  }
+
+  changeLanguage(lang: string) {
+    this.languageService.changeLanguage(lang);
+    this.currentLang = lang;
+    this.languageService.storeLanguage(lang);
+  }
 
   logout() {
 

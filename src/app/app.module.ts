@@ -23,7 +23,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 
 @NgModule({
-  declarations: [AppComponent, CardModalComponent],
+  declarations: [AppComponent ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,ReactiveFormsModule, SharedModule,HttpClientModule,
     TranslateModule.forRoot({
       loader: {

@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Crear cuenta</ion-title>
+    <ion-title>{{ 'REGISTER.NEW_ACCOUNT' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,53 +11,53 @@
       <ion-grid>
         <ion-row>
           <ion-col style="display:flex" class="ion-justify-content-center">
-            <ion-text><h1>Crear un cuenta</h1></ion-text>
+            <ion-text><h1>{{ 'REGISTER.NEW_ACCOUNT' | translate }}</h1></ion-text>
           </ion-col>
         </ion-row>
       </ion-grid>
       <ion-grid>
         <ion-row>
           <ion-col style="display:flex" class="ion-justify-content-center ion-align-items-center">
-            ¿Tienes una cuenta?<ion-button style="text-transform:none" (click)="onLogin()" fill="clear">Inicia sesión</ion-button>
+            {{ 'REGISTER.ACCOUNT' | translate }}<ion-button style="text-transform:none" (click)="onLogin()" fill="clear">{{ 'LOGIN.LOGIN' | translate }}</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
       <ion-item>
-        <ion-input labelPlacement="floating" label="Nombre" type="text" formControlName="name" required></ion-input>
+        <ion-input labelPlacement="floating" label="{{ 'USER.NAME' | translate }}" type="text" formControlName="name" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input labelPlacement="floating" label="Apellidos" type="text" formControlName="surname" required></ion-input>
+        <ion-input labelPlacement="floating" label="{{ 'USER.SURNAME' | translate }}" type="text" formControlName="surname" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input labelPlacement="floating" label="Email" type="email" formControlName="email" autocomplete="off" required></ion-input>
+        <ion-input labelPlacement="floating" label="{{ 'USER.EMAIL' | translate }}" type="email" formControlName="email" autocomplete="off" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input labelPlacement="floating" label="Contraseña" type="password" formControlName="password" required></ion-input>
+        <ion-input labelPlacement="floating" label="{{ 'USER.PASSWORD' | translate }}" type="password" formControlName="password" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input labelPlacement="floating" label="Repita contraseña" type="password" formControlName="confirmPassword" required></ion-input>
+        <ion-input labelPlacement="floating" label="{{ 'USER.REPEAT_PASSWORD' | translate }}" type="password" formControlName="confirmPassword" required></ion-input>
       </ion-item>
       <ion-text class="input-error" color="danger" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
-        <p *ngIf="name?.errors?.['required']">*Debe introducir su nombre</p>
-        <p *ngIf="name?.errors?.['minlength']">*El nombre debe tener al menos dos caracteres</p>
+        <p *ngIf="name?.errors?.['required']">{{ 'REGISTER.ERRORS.NAME_REQUIRED' | translate }}</p>
+        <p *ngIf="name?.errors?.['minlength']">{{ 'REGISTER.ERRORS.NAME_MIN_LENGTH' | translate }}</p>
       </ion-text>
       <ion-text class="input-error" color="danger" *ngIf="surname?.invalid && (surname?.dirty || surname?.touched)">
-        <p *ngIf="surname?.errors?.['required']">*Debe introducir su/s apellido/s</p>
-        <p *ngIf="surname?.errors?.['minlength']">*Su/s apellido/s debe/n tener al menos dos caracteres</p>
+        <p *ngIf="surname?.errors?.['required']">{{ 'REGISTER.ERRORS.SURNAME_REQUIRED' | translate }}</p>
+        <p *ngIf="surname?.errors?.['minlength']">{{ 'REGISTER.ERRORS.SURNAME_MIN_LENGTH' | translate }}</p>
       </ion-text>
       <ion-text class="input-error" color="danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-        <p *ngIf="email?.errors?.['required']">*Debe introducir un email</p>
-        <p *ngIf="email?.errors?.['email']">*Debe introducir un email correcto</p>
+        <p *ngIf="email?.errors?.['required']">{{ 'REGISTER.ERRORS.EMAIL_REQUIRED' | translate }}</p>
+        <p *ngIf="email?.errors?.['email']">{{ 'REGISTER.ERRORS.EMAIL_INCORRECT' | translate }}</p>
       </ion-text>
       <ion-text class="input-error" color="danger" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
-        <p *ngIf="password?.errors?.['required']">*Debe introducir una contraseña</p>
-        <p *ngIf="password?.errors?.['passwordStrength']">*Al menos 8 caracteres, una mayúscula, una minúscula, un dígito y un caracter especial (&#64;$!%*?&.)</p>
+        <p *ngIf="password?.errors?.['required']">{{ 'REGISTER.ERRORS.PASSWORD_REQUIRED' | translate }}</p>
+        <p *ngIf="password?.errors?.['passwordStrength']">{{ 'REGISTER.ERRORS.PASSWORD_INCORRECT' | translate }}</p>
       </ion-text>
       <ion-text class="input-error" color="danger" *ngIf="registerForm.errors?.['passwordsMismatch']">
-        <p>*Las contraseñas no coinciden</p>
+        <p>{{ 'REGISTER.ERRORS.CONFIRM_PASSWORD' | translate }}</p>
       </ion-text>
       <ion-button style="text-transform:none" expand="block" type="submit" [disabled]="registerForm.invalid">
-        Crear cuenta
+        {{ 'REGISTER.CREATE' | translate }}
       </ion-button>
     </form>
   </div>

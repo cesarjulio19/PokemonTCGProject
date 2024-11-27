@@ -2,10 +2,10 @@
   <div class="modal-content" (click)="closeModal()">
     <div class="card-info">
       <h2>{{ card.name }}</h2>
-      <p><strong>Número:</strong> {{ card.number }}</p>
-      <p><strong>Tipo Pokemon:</strong> {{ card.type }}</p>
-      <p><strong>Rareza:</strong> {{ card.rarity }}</p>
-      <p><strong>Tipo Carta</strong> {{ card.superType }}</p>
+      <p><strong>{{ 'CARD_MODAL.NUMBER' | translate }}</strong> {{ card.number }}</p>
+      <p><strong>{{ 'CARD_MODAL.TYPE' | translate }}</strong> {{ card.type }}</p>
+      <p><strong>{{ 'CARD_MODAL.RARITY' | translate }}</strong> {{ card.rarity }}</p>
+      <p><strong>{{ 'CARD_MODAL.SUPERTYPE' | translate }}</strong> {{ card.superType }}</p>
     </div>
     <div class="card-image">
       <img [src]="card.picture" alt="{{ card.name }}" />
