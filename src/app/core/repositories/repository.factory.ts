@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BaseRepositoryHttpService } from './impl/base-repository-http.service';
 import { IBaseRepository } from './intefaces/base-repository.interface';
 import { Person } from '../models/person.model';
-import { AUTH_MAPPING_TOKEN, AUTH_ME_API_URL_TOKEN, AUTH_SIGN_IN_API_URL_TOKEN, AUTH_SIGN_UP_API_URL_TOKEN, BACKEND_TOKEN, CARDS_API_URL_TOKEN, CARDS_REPOSITORY_MAPPING_TOKEN, CARDS_REPOSITORY_TOKEN, CARDS_RESOURCE_NAME_TOKEN, GROUPS_API_URL_TOKEN, GROUPS_REPOSITORY_MAPPING_TOKEN, GROUPS_REPOSITORY_TOKEN, GROUPS_RESOURCE_NAME_TOKEN, PEOPLE_API_URL_TOKEN, PEOPLE_REPOSITORY_MAPPING_TOKEN, PEOPLE_REPOSITORY_TOKEN, PEOPLE_RESOURCE_NAME_TOKEN, SETS_API_URL_TOKEN, SETS_REPOSITORY_MAPPING_TOKEN, SETS_REPOSITORY_TOKEN, SETS_RESOURCE_NAME_TOKEN, UPLOAD_API_URL_TOKEN } from './repository.tokens';
+import { AUTH_MAPPING_TOKEN, AUTH_ME_API_URL_TOKEN, AUTH_SIGN_IN_API_URL_TOKEN, AUTH_SIGN_UP_API_URL_TOKEN, BACKEND_TOKEN, CARDS_API_URL_TOKEN, CARDS_REPOSITORY_MAPPING_TOKEN, CARDS_REPOSITORY_TOKEN, CARDS_RESOURCE_NAME_TOKEN, GROUPS_API_URL_TOKEN, GROUPS_REPOSITORY_MAPPING_TOKEN, GROUPS_REPOSITORY_TOKEN, GROUPS_RESOURCE_NAME_TOKEN, MYCARDS_API_URL_TOKEN, MYCARDS_REPOSITORY_MAPPING_TOKEN, MYCARDS_REPOSITORY_TOKEN, MYCARDS_RESOURCE_NAME_TOKEN, PACKS_API_URL_TOKEN, PACKS_REPOSITORY_MAPPING_TOKEN, PACKS_REPOSITORY_TOKEN, PACKS_RESOURCE_NAME_TOKEN, PEOPLE_API_URL_TOKEN, PEOPLE_REPOSITORY_MAPPING_TOKEN, PEOPLE_REPOSITORY_TOKEN, PEOPLE_RESOURCE_NAME_TOKEN, SETS_API_URL_TOKEN, SETS_REPOSITORY_MAPPING_TOKEN, SETS_REPOSITORY_TOKEN, SETS_RESOURCE_NAME_TOKEN, UPLOAD_API_URL_TOKEN } from './repository.tokens';
 import { BaseRespositoryLocalStorageService } from './impl/base-repository-local-storage.service';
 import { Model } from '../models/base.model';
 import { IBaseMapping } from './intefaces/base-mapping.interface';
@@ -27,6 +27,10 @@ import { Card } from '../models/card.model';
 import { Set } from '../models/set.model';
 import { CardsMappingStrapi } from './impl/cards-mapping-strapi.service';
 import { SetsMappingStrapi } from './impl/sets-mapping-strapi.service';
+import { MyCard } from '../models/mycard.model';
+import { MyCardsMappingStrapi } from './impl/mycards-mapping-strapi.service';
+import { PacksMappingStrapi } from './impl/packs-mapping-strapi.service';
+import { Pack } from '../models/pack.model';
 export function createBaseRepositoryFactory<T extends Model>(
   token: InjectionToken<IBaseRepository<T>>,
   dependencies:any[]): FactoryProvider {
@@ -50,11 +54,13 @@ export function createBaseRepositoryFactory<T extends Model>(
   };
 };
 
-type ModelType = 'card' | 'set';
+type ModelType = 'card' | 'set' | 'mycard' | 'pack';
 
 const modelTypeMapping: Record<ModelType, new () => IBaseMapping<any>> = {
   card: CardsMappingStrapi,
   set: SetsMappingStrapi,
+  mycard: MyCardsMappingStrapi,
+  pack: PacksMappingStrapi,
 };
 
 export function createBaseMappingFactory<T extends Model>(
@@ -110,6 +116,18 @@ export const CardsMappingFactory = createBaseMappingFactory<Card>(
   'card'
 );
 
+export const MyCardsMappingFactory = createBaseMappingFactory<MyCard>(
+  MYCARDS_REPOSITORY_MAPPING_TOKEN, 
+  [BACKEND_TOKEN],
+  'mycard'
+);
+
+export const PacksMappingFactory = createBaseMappingFactory<Pack>(
+  PACKS_REPOSITORY_MAPPING_TOKEN, 
+  [BACKEND_TOKEN],
+  'pack'
+);
+
 export const SetsMappingFactory = createBaseMappingFactory<Set>(
   SETS_REPOSITORY_MAPPING_TOKEN, 
   [BACKEND_TOKEN],
@@ -163,4 +181,10 @@ export const CardsRepositoryFactory: FactoryProvider = createBaseRepositoryFacto
 );
 export const SetsRepositoryFactory: FactoryProvider = createBaseRepositoryFactory<Set>(SETS_REPOSITORY_TOKEN,
   [BACKEND_TOKEN, HttpClient, BaseAuthenticationService, SETS_API_URL_TOKEN, SETS_RESOURCE_NAME_TOKEN, SETS_REPOSITORY_MAPPING_TOKEN]
+);
+export const MyCardsRepositoryFactory: FactoryProvider = createBaseRepositoryFactory<MyCard>(MYCARDS_REPOSITORY_TOKEN,
+  [BACKEND_TOKEN, HttpClient, BaseAuthenticationService, MYCARDS_API_URL_TOKEN, MYCARDS_RESOURCE_NAME_TOKEN, MYCARDS_REPOSITORY_MAPPING_TOKEN]
+);
+export const PacksRepositoryFactory: FactoryProvider = createBaseRepositoryFactory<Pack>(PACKS_REPOSITORY_TOKEN,
+  [BACKEND_TOKEN, HttpClient, BaseAuthenticationService, PACKS_API_URL_TOKEN, PACKS_RESOURCE_NAME_TOKEN, PACKS_REPOSITORY_MAPPING_TOKEN]
 );

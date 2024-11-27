@@ -8,14 +8,16 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
-import { AUTH_ME_API_URL_TOKEN, AUTH_SIGN_IN_API_URL_TOKEN, AUTH_SIGN_UP_API_URL_TOKEN, BACKEND_TOKEN, CARDS_API_URL_TOKEN, CARDS_RESOURCE_NAME_TOKEN, GROUPS_API_URL_TOKEN, GROUPS_RESOURCE_NAME_TOKEN, PEOPLE_API_URL_TOKEN, PEOPLE_RESOURCE_NAME_TOKEN, SETS_API_URL_TOKEN, SETS_RESOURCE_NAME_TOKEN, UPLOAD_API_URL_TOKEN } from './core/repositories/repository.tokens';
-import { AuthMappingFactory, AuthenticationServiceFactory, CardsMappingFactory, CardsRepositoryFactory, MediaServiceFactory, SetsMappingFactory, SetsRepositoryFactory } from './core/repositories/repository.factory';
+import { AUTH_ME_API_URL_TOKEN, AUTH_SIGN_IN_API_URL_TOKEN, AUTH_SIGN_UP_API_URL_TOKEN, BACKEND_TOKEN, CARDS_API_URL_TOKEN, CARDS_RESOURCE_NAME_TOKEN, GROUPS_API_URL_TOKEN, GROUPS_RESOURCE_NAME_TOKEN, MYCARDS_API_URL_TOKEN, MYCARDS_RESOURCE_NAME_TOKEN, PACKS_API_URL_TOKEN, PACKS_RESOURCE_NAME_TOKEN, PEOPLE_API_URL_TOKEN, PEOPLE_RESOURCE_NAME_TOKEN, SETS_API_URL_TOKEN, SETS_RESOURCE_NAME_TOKEN, UPLOAD_API_URL_TOKEN } from './core/repositories/repository.tokens';
+import { AuthMappingFactory, AuthenticationServiceFactory, CardsMappingFactory, CardsRepositoryFactory, MediaServiceFactory, MyCardsMappingFactory, MyCardsRepositoryFactory, PacksMappingFactory, PacksRepositoryFactory, SetsMappingFactory, SetsRepositoryFactory } from './core/repositories/repository.factory';
 import { SharedModule } from './shared/shared.module';
 import { CardsService } from './core/services/impl/cards.service';
 import { SetsService } from './core/services/impl/sets.service';
 import { CardModalComponent } from './shared/components/card-modal/card-modal.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MyCardsService } from './core/services/impl/mycards.service';
+import { PacksService } from './core/services/impl/packs.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -38,8 +40,12 @@ export function createTranslateLoader(http: HttpClient) {
     { provide: BACKEND_TOKEN, useValue: 'strapi' },
     { provide: CARDS_RESOURCE_NAME_TOKEN, useValue: 'cards' },
     { provide: SETS_RESOURCE_NAME_TOKEN, useValue: 'sets' },
+    { provide: MYCARDS_RESOURCE_NAME_TOKEN, useValue: 'my-cards' },
+    { provide: PACKS_RESOURCE_NAME_TOKEN, useValue: 'packs' },
     { provide: CARDS_API_URL_TOKEN, useValue: 'http://localhost:1337/api' },
     { provide: SETS_API_URL_TOKEN, useValue: 'http://localhost:1337/api' },
+    { provide: MYCARDS_API_URL_TOKEN, useValue: 'http://localhost:1337/api' },
+    { provide: PACKS_API_URL_TOKEN, useValue: 'http://localhost:1337/api' },
     { provide: AUTH_SIGN_IN_API_URL_TOKEN, useValue: 'http://localhost:1337/api/auth/local' },
     { provide: AUTH_SIGN_UP_API_URL_TOKEN, useValue: 'http://localhost:1337/api/auth/local/register' },
     { provide: AUTH_ME_API_URL_TOKEN, useValue: 'http://localhost:1337/api/users/me' },
@@ -47,9 +53,13 @@ export function createTranslateLoader(http: HttpClient) {
     
     CardsMappingFactory,
     SetsMappingFactory,
+    MyCardsMappingFactory,
+    PacksMappingFactory,
     AuthMappingFactory,
     CardsRepositoryFactory,
     SetsRepositoryFactory,
+    MyCardsRepositoryFactory,
+    PacksRepositoryFactory,
     // Registrar otros repositorios según sea necesario
     // Servicios de aplicación
 
@@ -60,6 +70,14 @@ export function createTranslateLoader(http: HttpClient) {
     {
       provide: 'SetsService',
       useClass: SetsService
+    },
+    {
+      provide: 'MyCardsService',
+      useClass: MyCardsService
+    },
+    {
+      provide: 'PacksService',
+      useClass: PacksService
     },
 
     AuthenticationServiceFactory,

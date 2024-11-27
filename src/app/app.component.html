@@ -24,13 +24,13 @@
         <ion-item (click)="menu.close()" routerLink="/home" routerDirection="root">
           {{ 'MENU.HOME' | translate }}
         </ion-item>
-        <ion-item (click)="menu.close()" routerLink="/cards" routerDirection="root">
+        <ion-item (click)="menu.close()"  *ngIf="(authSvc.authenticated$ | async)" routerLink="/cards" routerDirection="root">
           {{ 'MENU.CARDS' | translate }}
         </ion-item>
-        <ion-item (click)="menu.close()" routerLink="/my-cards" routerDirection="root">
+        <ion-item (click)="menu.close()" *ngIf="(authSvc.authenticated$ | async)" routerLink="/my-cards" routerDirection="root">
           {{ 'MENU.MYCARDS' | translate }}
         </ion-item>
-        <ion-item (click)="menu.close()"  (click)="logout()" button>
+        <ion-item (click)="menu.close()" *ngIf="(authSvc.authenticated$ | async)"  (click)="logout()" button>
           {{ 'MENU.LOGOUT' | translate }}
         </ion-item>
       </ion-list>
