@@ -1,8 +1,10 @@
+import { Observable } from "rxjs";
 import { MyCard } from "../../models/mycard.model";
 import { IBaseService } from "./base-service.interface";
+import { Paginated } from "../../models/paginated.model";
 
 
 export interface IMyCardsService extends IBaseService<MyCard> {
-    // Métodos específicos si los hay
+    getMyCardsByUser(setId: string, page: number, pageSize: number): Observable<Paginated<MyCard>>;
 }
   

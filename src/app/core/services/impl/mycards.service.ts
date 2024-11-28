@@ -4,6 +4,8 @@ import { MyCard } from "../../models/mycard.model";
 import { IMyCardsService } from "../interfaces/mycards-service.interface";
 import { MYCARDS_REPOSITORY_TOKEN } from "../../repositories/repository.tokens";
 import { IMyCardsRepository } from "../../repositories/intefaces/mycards-repository.interface";
+import { Observable } from "rxjs";
+import { Paginated } from "../../models/paginated.model";
 
 
 
@@ -15,6 +17,12 @@ import { IMyCardsRepository } from "../../repositories/intefaces/mycards-reposit
       @Inject(MYCARDS_REPOSITORY_TOKEN) repository: IMyCardsRepository
     ) {
       super(repository);
+    }
+
+
+    getMyCardsByUser(userId: string, page: number, pageSize: number): Observable<Paginated<MyCard>> {
+      const filters = { 'user.id': userId }; 
+      return this.repository.getAll(page, pageSize, filters) as Observable<Paginated<MyCard>>;
     }
   
     // Implementa métodos específicos si los hay

@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <app-set-selector [sets$]="sets$" (setSelected)="onSetSelected($event)"></app-set-selector>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">myCards</ion-title>

@@ -8,6 +8,7 @@ import { MyCardsPageRoutingModule } from './my-cards-routing.module';
 
 import { MyCardsPage } from './my-cards.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
     IonicModule,
     MyCardsPageRoutingModule,
     TranslateModule.forChild(),
+    SharedModule,
   ],
   declarations: [MyCardsPage]
 })
