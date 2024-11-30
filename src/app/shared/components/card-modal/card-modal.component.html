@@ -8,7 +8,8 @@
       <p><strong>{{ 'CARD_MODAL.SUPERTYPE' | translate }}</strong> {{ card.superType }}</p>
     </div>
     <div class="card-image">
-      <img [src]="card.picture" alt="{{ card.name }}" />
+      <ion-img [src]="card.illustration" *ngIf="card.illustration"></ion-img>
+      <ion-img [src]="card.picture?.medium" *ngIf="!card.illustration"></ion-img>
     </div>
   </div>
 </ion-content>

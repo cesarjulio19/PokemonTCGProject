@@ -69,7 +69,7 @@ export class StrapiRepositoryService<T extends Model> extends BaseRepositoryHttp
 
     if(page!=-1){
       return this.http.get<PaginatedRaw<T>>(
-        `${this.apiUrl}/${this.resource}?pagination[page]=${page}&pagination[pageSize]=${pageSize}&${search}&populate=user,set,card`, 
+        `${this.apiUrl}/${this.resource}?pagination[page]=${page}&pagination[pageSize]=${pageSize}&${search}&populate=user,set,card,image,illustration`, 
         this.getHeaders()).pipe(map(res=>{
           return this.mapping.getPaginated(page, pageSize, res.meta.pagination.total, res.data);
         }));
@@ -83,6 +83,19 @@ export class StrapiRepositoryService<T extends Model> extends BaseRepositoryHttp
           });
         }));
     }
+  }
+
+  override getById(id: string): Observable<T | null> {
+    return this.http
+    .get<Data<T>>(
+      `${this.apiUrl}/${this.resource}/${id}?populate=user,set,card,image,illustration`, // Incluye relaciones con `populate=*` si es necesario
+      this.getHeaders()
+    )
+    .pipe(
+      map((response: Data<T>) => {
+        return this.mapping.getOne(response); // Mapear los datos al modelo T
+      }),
+    );
   }
 
   override add(entity: T): Observable<T> {

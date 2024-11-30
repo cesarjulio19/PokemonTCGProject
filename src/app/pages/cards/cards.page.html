@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [style.background-image]="'url(' + setImage + ')'" [style.background-size]="'cover'" [style.background-position]="'center'">
 
   <app-set-selector [sets$]="sets$" (setSelected)="onSetSelected($event)"></app-set-selector>
 
@@ -16,7 +16,8 @@
     <ion-row>
       <ion-col size="6" size-md="3" *ngFor="let card of (cards$ | async)">
         <ion-card (click)="openCardModal(card)">
-          <ion-img [src]="card.picture"></ion-img>
+          <ion-img [src]="card.illustration" *ngIf="card.illustration"></ion-img>
+          <ion-img [src]="card.picture?.small" *ngIf="!card.illustration" ></ion-img>
         </ion-card>
       </ion-col>
     </ion-row>

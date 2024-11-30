@@ -60,6 +60,14 @@
     "TYPE": "Pokémon Type:",
     "RARITY": "Rarity:",
     "SUPERTYPE": "Card Type:"
+},
+
+"MYCARDS":{
+  "DELETE": {
+    "1<": "Do you want to delete a copy of this card? remaining cards: ",
+    "1==": "If you delete this card you will be left with no copies, remaining copies: "
+  }
+
 }
 
 

@@ -26,7 +26,6 @@ interface PackData {
 interface PackAttributes {
     name: string
     set: SetRaw | number | null
-    numberOfCards:number
     createdAt?: string
     updatedAt?: string
     publishedAt?: string
@@ -45,6 +44,7 @@ interface SetData {
   
 interface SetAttributes {
     name: string
+    image:MediaRaw | number | null
     createdAt: string
     updatedAt: string
     publishedAt: string
@@ -52,6 +52,7 @@ interface SetAttributes {
 
 interface SetAttributes {
     name: string
+    image:MediaRaw | number | null
 }
 
 @Injectable({
@@ -66,7 +67,6 @@ interface SetAttributes {
             data:{
                 name:data.name,
                 set:data.setId?Number(data.setId):null,
-                numberOfCards:data.numberCards,
 
             }
         };
@@ -78,8 +78,6 @@ interface SetAttributes {
         Object.keys(data).forEach(key => {
             switch(key){
                 case 'name': mappedData.name = data[key];
-                break;
-                case 'numberCards': mappedData.numberOfCards = data[key];
                 break;
                 case 'setId': mappedData.set = data[key] ? Number(data[key]) : null;
                 break;
@@ -106,7 +104,6 @@ interface SetAttributes {
         return {
             id: id.toString(),
             name: attributes.name,
-            numberCards: attributes.numberOfCards,
             setId: typeof attributes.set === 'object' ? attributes.set?.data?.id.toString() : undefined,
         };
     }

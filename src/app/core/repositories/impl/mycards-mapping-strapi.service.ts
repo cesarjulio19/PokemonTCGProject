@@ -51,6 +51,8 @@ interface UserAttributes {
     provider: string
     confirmed: boolean
     blocked: boolean
+    image:MediaRaw | number | null
+    adminRole:boolean
     createdAt: string
     updatedAt: string
 }
@@ -67,11 +69,12 @@ interface CardData{
 interface CardAttributes {
     name: string
     number: number
-    image: string
+    illustration: string
     set: SetRaw | number | null
     type:string
     rarity:string
     superType:string
+    image:MediaRaw | number | null
     createdAt?: string
     updatedAt?: string
     publishedAt?: string
@@ -90,6 +93,7 @@ interface SetData {
   
 interface SetAttributes {
     name: string
+    image:MediaRaw | number | null
     createdAt: string
     updatedAt: string
     publishedAt: string
@@ -97,6 +101,7 @@ interface SetAttributes {
 
 interface SetAttributes {
     name: string
+    image:MediaRaw | number | null
 }
 
 @Injectable({

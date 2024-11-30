@@ -60,7 +60,20 @@
         "TYPE": "Tipo Pokémon:",
         "RARITY": "Rareza:",
         "SUPERTYPE": "Tipo De La Carta:"
+    },
+
+    "MYCARDS":{
+        "DELETE": {
+        "1<": "¿Quieres eliminar una copia de esta carta? cartas restantes: ",
+        "1==": "Si eliminas esta carta no tendrás más copias, cartas restantes: "
+
+        }
+
     }
+
+    
+
+
 
 
 }

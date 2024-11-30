@@ -26,11 +26,12 @@ interface CardData {
 interface CardAttributes {
     name: string
     number: number
-    image: string
+    illustration: string
     set: SetRaw | number | null
     type:string
     rarity:string
     superType:string
+    image:MediaRaw | number | null
     createdAt?: string
     updatedAt?: string
     publishedAt?: string
@@ -49,6 +50,7 @@ interface SetData {
   
 interface SetAttributes {
     name: string
+    image:MediaRaw | number | null
     createdAt: string
     updatedAt: string
     publishedAt: string
@@ -56,6 +58,7 @@ interface SetAttributes {
 
 interface SetAttributes {
     name: string
+    image:MediaRaw | number | null
 }
 
 
@@ -75,12 +78,12 @@ interface Meta {}
             data:{
                 name:data.name,
                 number:data.number,
-                image:data.picture,
+                illustration:data.illustration,
                 set:data.setId?Number(data.setId):null,
                 type:data.type,
                 rarity:data.rarity,
-                superType:data.superType
-
+                superType:data.superType,
+                image:data.picture?Number(data.picture):null
             }
         };
     }
@@ -93,11 +96,13 @@ interface Meta {}
                 break;
                 case 'number': mappedData.number = data[key];
                 break;
-                case 'picture': mappedData.image = data[key];
+                case 'illustration': mappedData.illustration = data[key];
                 break;
                 case 'type': mappedData.type = data[key];
                 break;
                 case 'rarity': mappedData.rarity = data[key];
+                break;
+                case 'picture': mappedData.image = data[key] ? Number(data[key]) : null;
                 break;
                 case 'setId': mappedData.set = data[key] ? Number(data[key]) : null;
                 break;
@@ -125,10 +130,17 @@ interface Meta {}
             id: id.toString(),
             name: attributes.name,
             number: attributes.number,
-            picture: attributes.image,
+            illustration: attributes.illustration,
             rarity: attributes.rarity,
             type: attributes.type,
             superType: attributes.superType,
+            picture: typeof attributes.image === 'object' ? {
+                url: attributes.image?.data?.attributes?.url,
+                large: attributes.image?.data?.attributes?.formats?.large?.url || attributes.image?.data?.attributes?.url,
+                medium: attributes.image?.data?.attributes?.formats?.medium?.url || attributes.image?.data?.attributes?.url,
+                small: attributes.image?.data?.attributes?.formats?.small?.url || attributes.image?.data?.attributes?.url,
+                thumbnail: attributes.image?.data?.attributes?.formats?.thumbnail?.url || attributes.image?.data?.attributes?.url,
+            } : undefined,
             setId: typeof attributes.set === 'object' ? attributes.set?.data?.id.toString() : undefined,
 
         };

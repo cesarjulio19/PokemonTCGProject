@@ -6,7 +6,14 @@ import { Model } from "./base.model";
 export interface Card extends Model {
   name: string;
   number: number;
-  picture: string;
+  illustration: string;
+  picture?:{
+    url:string | undefined,
+    large:string | undefined,
+    medium:string | undefined,
+    small:string | undefined,
+    thumbnail:string | undefined
+  },
   type: string; 
   rarity: string; 
   superType:string;

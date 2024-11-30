@@ -48,3 +48,8 @@
 .animated-avatar-container img {
   transition: transform 0.5s ease-out;
 }
+
+ion-content {
+  --background: none; /* Elimina el fondo oscuro predefinido */
+
+}

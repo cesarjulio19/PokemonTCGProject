@@ -29,6 +29,7 @@ export class CardsPage implements OnInit {
    pageSize: number = 25;
    totalPages: number = 1;
    selectedSetId: string = '-1';
+   setImage:string | undefined = "/assets/images/fondo.jpg";
 
   
 
@@ -51,9 +52,34 @@ export class CardsPage implements OnInit {
 
   onSetSelected(selectedSetId: string) {
     this.selectedSetId = selectedSetId;
-    this.currentPage = 1;
-    this._cards.next([]); 
-    this.loadCards(); 
+    if(selectedSetId != "-1"){
+
+      this.setsSvc.getById(selectedSetId).subscribe({
+        next: (response: Set | null) => {
+           if(response){
+            console.log(response.picture?.url)
+            if (!response.picture?.url){
+              this.setImage = "/assets/images/fondo.jpg"
+            }else{
+              this.setImage = response.picture?.url
+            }
+              
+              console.log( this.setImage )
+              this.currentPage = 1;
+              this._cards.next([]); 
+              this.loadCards(); 
+           }
+        }
+      })
+
+    }else{
+      this.setImage = "/assets/images/fondo.jpg"
+      console.log( this.setImage )
+      this.currentPage = 1;
+      this._cards.next([]); 
+      this.loadCards(); 
+    }
+
     
   }
 
@@ -107,6 +133,7 @@ export class CardsPage implements OnInit {
           next:(response:Paginated<Card>)=>{
             this._cards.next([...this._cards.value, ...response.data]);
             this.currentPage++;
+
             notify?.complete();
           }
         });
@@ -122,6 +149,7 @@ export class CardsPage implements OnInit {
           next:(response:Paginated<Card>)=>{
             this._cards.next([...this._cards.value, ...response.data]);
             this.currentPage++;
+            console.log(response.data)
             notify?.complete();
           }
         });
