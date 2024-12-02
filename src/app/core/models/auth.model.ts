@@ -8,14 +8,12 @@ export interface SignUpPayload{
     password:string,
     name:string,
     surname:string,
-    birthDate:string,
-    gender:string,
-    group:string,
     user:string
 }
 
 export interface User{
     id:string,
     username:string,
-    email:string
+    email:string,
+  
 }

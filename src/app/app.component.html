@@ -21,6 +21,13 @@
     </ion-header>
     <ion-content>
       <ion-list>
+        <ion-item (click)="menu.close()"  *ngIf="(authSvc.authenticated$ | async)" routerLink="/profile" routerDirection="root">
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" *ngIf="!user?.picture?.url"/>
+            <img alt="Silhouette of a person's head" [src]="user?.picture?.url" *ngIf="user?.picture?.url"/>
+          </ion-avatar>
+          <p>{{user?.username}}</p>
+        </ion-item>
         <ion-item (click)="menu.close()" routerLink="/home" routerDirection="root">
           {{ 'MENU.HOME' | translate }}
         </ion-item>

@@ -68,6 +68,18 @@
     "1==": "If you delete this card you will be left with no copies, remaining copies: "
   }
 
+},
+
+"PROFILE":{
+  "TITLE": "Profile",
+  "USERNAME" : "Username",
+  "EMAIL": "Email",
+  "UPDATE": "Update",
+  "ERRORS":{
+    "USERNAME_REQUIRED": "*Username is required",
+    "USERNAME_MIN_LENGTH": "*The username must be at least two characters"
+  }
+
 }
 
 

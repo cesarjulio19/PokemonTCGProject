@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ 'PROFILE.TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="4" class="ion-text-center">
+          <ion-card class="ion-no-margin">
+            <ion-card-content>
+              <app-picture-selectable formControlName="picture"></app-picture-selectable>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        
+        <ion-col size="12" size-md="8">
+          <ion-list>
+            <ion-item>
+              <ion-input [label]="'PROFILE.USERNAME' | translate" label-placement="stacked"  type="text" formControlName="username"></ion-input>
+            </ion-item>
+            <ion-text color="danger" *ngIf="username?.invalid && (username?.dirty || username?.touched)">
+              <p *ngIf="username?.errors?.['required']">{{ 'PROFILE.ERRORS.USERNAME_REQUIRED' | translate }}</p>
+              <p *ngIf="username?.errors?.['minlength']">{{ 'PROFILE.ERRORS.USERNAME_MIN_LENGTH' | translate }}</p>
+            </ion-text>
+
+            <!-- Email -->
+            <ion-item>
+              <ion-input [label]="'PROFILE.EMAIL' | translate" label-placement="stacked" type="email" formControlName="email"></ion-input>
+            </ion-item>
+            <ion-text color="danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+              <p *ngIf="email?.errors?.['required']">{{ 'REGISTER.ERRORS.EMAIL_REQUIRED' | translate }}</p>
+              <p *ngIf="email?.errors?.['email']">{{ 'REGISTER.ERRORS.EMAIL_INCORRECT' | translate }}</p>
+            </ion-text>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    <div class="ion-padding">
+      <ion-button [disabled]="!formGroup.valid || !formGroup.dirty" expand="full" type="submit">
+        {{ 'PROFILE.UPDATE' | translate }}
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

@@ -1,10 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Paginated } from "../../models/paginated.model";
-import { Person } from "../../models/person.model";
-import { Group } from "../../models/group.model";
 import { IAuthMapping } from "../interfaces/auth-mapping.interface";
 import { SignInPayload, SignUpPayload, User } from "../../models/auth.model";
+import { StrapiMedia } from "./strapi-media.service";
 
+
+interface MediaRaw{
+    data: StrapiMedia
+}
 
 export interface StrapiMeResponse {
     id: number
@@ -15,6 +18,8 @@ export interface StrapiMeResponse {
     blocked: boolean
     createdAt: string
     updatedAt: string
+    image:MediaRaw | number | null
+    adminRole:boolean
 }
 
 export interface StrapiSignInResponse {
@@ -36,6 +41,8 @@ export interface StrapiSignUpResponse {
     blocked: boolean
     createdAt: string
     updatedAt: string
+    image:MediaRaw | number | null
+    adminRole:boolean
   }
   
 
@@ -68,20 +75,23 @@ export interface GroupRaw {
             email:payload.email,
             password:payload.password,
             username:payload.name + " "+ payload.surname
+
         };
     }
     signIn(response: StrapiSignInResponse): User {
+        
         return {
             id:response.user.id.toString(),
             username:response.user.username,
-            email:response.user.email
+            email:response.user.email,
         };
     }
     signUp(response: StrapiSignUpResponse): User {
         return {
             id:response.user.id.toString(),
             username:response.user.username,
-            email:response.user.email
+            email:response.user.email,
+            
         };
     }
 
@@ -89,9 +99,13 @@ export interface GroupRaw {
         return {
             id:response.id.toString(),
             username:response.username,
-            email:response.email
+            email:response.email,
+           
+
         };
     }
+
+    
     
   }
   

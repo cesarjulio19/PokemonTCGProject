@@ -69,7 +69,21 @@
 
         }
 
+    },
+
+    "PROFILE":{
+        "TITLE": "Perfil",
+        "USERNAME" : "Username",
+        "EMAIL": "Email",
+        "UPDATE": "Actualizar",
+        "ERRORS":{
+            "USERNAME_REQUIRED": "*El nombre de usuario es obligatorio",
+            "USERNAME_MIN_LENGTH": "*El nombre de usuario debe tener al menos dos caracteres"
+        }
+
     }
+
+
 
     
 

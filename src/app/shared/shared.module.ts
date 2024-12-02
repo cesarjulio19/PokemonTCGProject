@@ -5,11 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { SetSelectorComponent } from './components/set-selector/set-selector.component';
 import { CardModalComponent } from './components/card-modal/card-modal.component';
+import { PictureSelectableComponent } from './components/picture-selectable/picture-selectable.component';
 
 
 
 @NgModule({
-  declarations: [SetSelectorComponent, CardModalComponent
+  declarations: [SetSelectorComponent, CardModalComponent,PictureSelectableComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +19,7 @@ import { CardModalComponent } from './components/card-modal/card-modal.component
     TranslateModule.forChild(),
     FormsModule,
   ],
-  exports: [SetSelectorComponent, CardModalComponent
+  exports: [SetSelectorComponent, CardModalComponent,PictureSelectableComponent
   ]
 })
 export class SharedModule { }
