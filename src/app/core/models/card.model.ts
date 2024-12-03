@@ -6,7 +6,7 @@ import { Model } from "./base.model";
 export interface Card extends Model {
   name: string;
   number: number;
-  illustration: string;
+  illustration?: string;
   picture?:{
     url:string | undefined,
     large:string | undefined,

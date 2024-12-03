@@ -37,6 +37,9 @@
         <ion-item (click)="menu.close()" *ngIf="(authSvc.authenticated$ | async)" routerLink="/my-cards" routerDirection="root">
           {{ 'MENU.MYCARDS' | translate }}
         </ion-item>
+        <ion-item (click)="menu.close()" *ngIf="(authSvc.authenticated$ | async)" routerLink="/packs" routerDirection="root">
+          {{ 'MENU.PACKS' | translate }}
+        </ion-item>
         <ion-item (click)="menu.close()" *ngIf="(authSvc.authenticated$ | async)"  (click)="logout()" button>
           {{ 'MENU.LOGOUT' | translate }}
         </ion-item>

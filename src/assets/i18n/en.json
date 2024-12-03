@@ -5,7 +5,8 @@
     "CARDS": "Cards",
     "MYCARDS": "My Cards",
     "LOGOUT": "Logout",
-    "PROFILE": "Profile"
+    "PROFILE": "Profile",
+    "PACKS": "Get cards"
   },
 
   "MESSAGES": {
@@ -80,7 +81,44 @@
     "USERNAME_MIN_LENGTH": "*The username must be at least two characters"
   }
 
+},
+
+"PACK":{
+  "OPEN_PACK": "Open Pack",
+  "CANT_OPEN" : "There are not enough cards in this set"
+},
+
+"SEARCH_SET_SELECTABLE":{
+  "SELECT_SET": "Select a set",
+  "NONE": "None",
+  "SEARCH": "Search"
+},
+
+"CARD":{
+  "NAME":"Name",
+  "NUMBER":"Number",
+  "TYPE":"Type",
+  "RARITY":"Rarity",
+  "SUPERTYPE":"Super Type",
+  "SET":"Set",
+  "ERRORS":{
+    "NAME_REQUIRED": "*Name required",
+    "NAME_MIN_LENGTH": "*The name must be at least two characters",
+    "NUMBER_REQUIRED": "*Number required",
+    "TYPE_REQUIRED": "*Type required",
+    "RARITY_REQUIRED": "*Rarity required",
+    "SUPERTYPE_REQUIRED": "*Super type required",
+    "SET_REQUIRED": "*Set required"
+  },
+
+  "TYPE_PLACEHOLDER": "Select a type"
+
+
 }
+
+
+
+
 
 
 

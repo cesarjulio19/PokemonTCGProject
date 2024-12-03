@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon slot="start" name="person-outline"></ion-icon>
+    <ion-title>
+      @if (mode=='edit') {
+        {{ 'PERSON.EDIT' | translate }}
+      }
+      @else {
+        {{ 'PERSON.NEW' | translate }}
+      }
+    </ion-title>
+    @if (isMobile) {
+      <ion-buttons slot="end">
+        <ion-button (click)="dismiss()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    }
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="4" class="ion-text-center">
+          <ion-card class="ion-no-margin">
+            <ion-card-content>
+              <app-picture-selectable formControlName="picture"></app-picture-selectable>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        
+        <ion-col size="12" size-md="8">
+          <ion-list>
+            <ion-item>
+              <ion-input [label]="'CARD.NAME' | translate" label-placement="stacked"  type="text" formControlName="name"></ion-input>
+            </ion-item>
+            <ion-text color="danger" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+              <p *ngIf="name?.errors?.['required']">{{ 'CARD.ERRORS.NAME_REQUIRED' | translate }}</p>
+              <p *ngIf="name?.errors?.['minlength']">{{ 'CARD.ERRORS.NAME_MIN_LENGTH' | translate }}</p>
+            </ion-text>
+
+            <!-- Number -->
+            <ion-item>
+              <ion-input [label]="'CARD.NUMBER' | translate" label-placement="stacked" type="Number" formControlName="number"></ion-input>
+            </ion-item>
+            <ion-text color="danger" *ngIf="number?.invalid && (number?.dirty || number?.touched)">
+              <p *ngIf="number?.errors?.['required']">{{ 'CARD.ERRORS.NUMBER_REQUIRED' | translate }}</p>
+            </ion-text>
+            <!-- TYPE -->
+            <ion-item>
+              <ion-select [label]="'CARD.TYPE' | translate" label-placement="stacked" formControlName="type" [placeholder]="'CARD.TYPE_PLACEHOLDER' | translate">
+                <ion-select-option *ngFor="let type of types" [value]="type">{{ type }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-text color="danger" *ngIf="type?.invalid && (type?.dirty || type?.touched)">
+              <p *ngIf="type?.errors?.['required']">{{ 'CARD.ERRORS.TYPE_REQUIRED' | translate }}</p>
+            </ion-text>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    <div class="ion-padding">
+      <ion-button [disabled]="!formGroup.valid || !formGroup.dirty" expand="full" type="submit">
+        {{ 'PROFILE.UPDATE' | translate }}
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

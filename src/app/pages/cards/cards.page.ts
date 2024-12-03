@@ -88,9 +88,9 @@ export class CardsPage implements OnInit {
     if(this.selectedSetId != "-1"){
      
       
-    this.cardsSvc.getCardsBySet(this.selectedSetId, this.currentPage, this.pageSize).subscribe({
+    this.cardsSvc.getCardsBySetPaginated(this.selectedSetId, this.currentPage, this.pageSize).subscribe({
       next:(response:Paginated<Card>) =>{
-
+        console.log(response.data, "response")
         this._cards.next([...response.data]);
         this.currentPage++;
         this.totalPages = response.pages;
@@ -129,7 +129,7 @@ export class CardsPage implements OnInit {
     if(this.selectedSetId != "-1"){
 
       if(this.currentPage<=this.totalPages){
-        this.cardsSvc.getCardsBySet(this.selectedSetId, this.currentPage, this.pageSize).subscribe({
+        this.cardsSvc.getCardsBySetPaginated(this.selectedSetId, this.currentPage, this.pageSize).subscribe({
           next:(response:Paginated<Card>)=>{
             this._cards.next([...this._cards.value, ...response.data]);
             this.currentPage++;
@@ -170,6 +170,8 @@ export class CardsPage implements OnInit {
     });
     await modal.present();
   }
+
+  
 
   onIonInfinite(ev:InfiniteScrollCustomEvent) {
     this.loadMoreCards(ev.target);

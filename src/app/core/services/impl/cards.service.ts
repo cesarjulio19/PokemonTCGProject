@@ -18,9 +18,14 @@ export class CardsService extends BaseService<Card> implements ICardsService {
     super(repository);
   }
 
-  getCardsBySet(setId: string, page: number, pageSize: number): Observable<Paginated<Card>> {
+  getCardsBySetPaginated(setId: string, page: number, pageSize: number): Observable<Paginated<Card>> {
     const filters = { 'set.id': setId }; 
     return this.repository.getAll(page, pageSize, filters) as Observable<Paginated<Card>>;
+  }
+
+  getCardsBySet(setId: string): Observable<Card[]> {
+    const filters = { 'set.id': setId }; 
+    return this.repository.getAll(-1, 25,filters) as Observable<Card[]>;
   }
 
   // Implementa métodos específicos si los hay

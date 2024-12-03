@@ -6,11 +6,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SetSelectorComponent } from './components/set-selector/set-selector.component';
 import { CardModalComponent } from './components/card-modal/card-modal.component';
 import { PictureSelectableComponent } from './components/picture-selectable/picture-selectable.component';
+import { PackModalComponent } from './components/pack-modal/pack-modal.component';
+import { SearchSetSelectableComponent } from './components/search-set-selectable/search-set-selectable.component';
+import { CardFormModalComponent } from './components/card-form-modal/card-form-modal.component';
 
 
 
 @NgModule({
-  declarations: [SetSelectorComponent, CardModalComponent,PictureSelectableComponent
+  declarations: [SetSelectorComponent, CardModalComponent,PictureSelectableComponent,PackModalComponent,SearchSetSelectableComponent,CardFormModalComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +22,7 @@ import { PictureSelectableComponent } from './components/picture-selectable/pict
     TranslateModule.forChild(),
     FormsModule,
   ],
-  exports: [SetSelectorComponent, CardModalComponent,PictureSelectableComponent
+  exports: [SetSelectorComponent, CardModalComponent,PictureSelectableComponent,PackModalComponent,SearchSetSelectableComponent,CardFormModalComponent
   ]
 })
 export class SharedModule { }

@@ -26,7 +26,7 @@ interface CardData {
 interface CardAttributes {
     name: string
     number: number
-    illustration: string
+    illustration?: string
     set: SetRaw | number | null
     type:string
     rarity:string
@@ -78,7 +78,6 @@ interface Meta {}
             data:{
                 name:data.name,
                 number:data.number,
-                illustration:data.illustration,
                 set:data.setId?Number(data.setId):null,
                 type:data.type,
                 rarity:data.rarity,
@@ -95,8 +94,6 @@ interface Meta {}
                 case 'name': mappedData.name = data[key];
                 break;
                 case 'number': mappedData.number = data[key];
-                break;
-                case 'illustration': mappedData.illustration = data[key];
                 break;
                 case 'type': mappedData.type = data[key];
                 break;

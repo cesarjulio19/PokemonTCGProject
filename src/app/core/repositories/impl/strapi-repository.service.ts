@@ -71,12 +71,12 @@ export class StrapiRepositoryService<T extends Model> extends BaseRepositoryHttp
       return this.http.get<PaginatedRaw<T>>(
         `${this.apiUrl}/${this.resource}?pagination[page]=${page}&pagination[pageSize]=${pageSize}&${search}&populate=user,set,card,image,illustration`, 
         this.getHeaders()).pipe(map(res=>{
-          return this.mapping.getPaginated(page, pageSize, res.meta.pagination.total, res.data);
+          return this.mapping.getPaginated(page, pageSize, res.meta.pagination.pageCount, res.data);
         }));
     }
     else{
       return this.http.get<PaginatedRaw<T>>(
-        `${this.apiUrl}/${this.resource}?&${search}`, 
+        `${this.apiUrl}/${this.resource}?&${search}&populate=user,set,card,image,illustration`, 
         this.getHeaders()).pipe(map((res:PaginatedRaw<T>)=>{
           return res.data.map((elem:Data<T>)=>{
             return this.mapping.getOne(elem);

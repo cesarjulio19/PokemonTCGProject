@@ -40,6 +40,12 @@ const routes: Routes = [
     canActivate: [authGuard],
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
+  {
+    path: 'packs',
+    canActivate: [authGuard],
+    loadChildren: () => import('./pages/packs/packs.module').then( m => m.PacksPageModule)
+  },
+
 
 
 

@@ -5,5 +5,6 @@ import { Paginated } from '../../models/paginated.model';
 
 export interface ICardsService extends IBaseService<Card> {
   
-  getCardsBySet(setId: string, page: number, pageSize: number): Observable<Paginated<Card>>;
+  getCardsBySetPaginated(setId: string, page: number, pageSize: number): Observable<Paginated<Card>>;
+  getCardsBySet(setId: string): Observable<Card[]>;
 }

@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ 'MENU.PACKS' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [style.background-image]="'url(' + setImage + ')'" [style.background-size]="'cover'" [style.background-position]="'center'">
+
+
+    <app-set-selector [sets$]="sets$" (setSelected)="onSetSelected($event)"></app-set-selector>
+
+     <div id="container-noOpen">
+      <ion-card>
+        <ion-img src="/assets/images/pokeball.png"></ion-img>
+      </ion-card>
+  
+      <ion-button (click)="openPack()" *ngIf="canOpen">
+        {{ 'PACK.OPEN_PACK' | translate }}
+      </ion-button>
+
+      <ion-button [disabled]="!canOpen" (click)="openPack()" *ngIf="!canOpen">
+        {{ 'PACK.CANT_OPEN' | translate }}
+      </ion-button>
+    </div>
+
+ 
+
+</ion-content>

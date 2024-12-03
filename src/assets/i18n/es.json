@@ -5,7 +5,8 @@
     "CARDS": "Cartas",
     "MYCARDS": "Mis Cartas",
     "LOGOUT": "Cerrar sesión",
-    "PROFILE": "Perfil"
+    "PROFILE": "Perfil",
+    "PACKS": "Consigue cartas"
     },
 
     "MESSAGES": {
@@ -81,7 +82,40 @@
             "USERNAME_MIN_LENGTH": "*El nombre de usuario debe tener al menos dos caracteres"
         }
 
+    },
+
+    "PACK":{
+        "OPEN_PACK": "Abrir Sobre",
+        "CANT_OPEN" : "no hay suficientes cartas en esta colección "
+    },
+
+   "SEARCH_SET_SELECTABLE":{
+        "SELECT_SET": "Selecciona una colección",
+        "NONE": "Ninguno",
+        "SEARCH": "Buscar"
+    },
+
+   "CARD":{
+        "NAME":"Nombre",
+        "NUMBER":"Número",
+        "TYPE":"Tipo",
+        "RARITY":"Rareza",
+        "SUPERTYPE":"Super Tipo",
+        "SET":"Colección",
+        "ERRORS":{
+            "NAME_REQUIRED": "*Nombre requerido",
+            "NAME_MIN_LENGTH": "*El nombre debe de tener al menos 2 caracteres",
+            "NUMBER_REQUIRED": "*Número requirido",
+            "TYPE_REQUIRED": "*Tipo requirido",
+            "RARITY_REQUIRED": "*Rareza requirida",
+            "SUPERTYPE_REQUIRED": "*Super tipo requirido",
+            "SET_REQUIRED": "*Colección requirida"
+        },
+        "TYPE_PLACEHOLDER": "Selecciona un tipo"
+
+
     }
+}
 
 
 
@@ -90,4 +124,3 @@
 
 
 
-}

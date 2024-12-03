@@ -25,8 +25,8 @@ import { Paginated } from "../../models/paginated.model";
       return this.repository.getAll(page, pageSize, filters) as Observable<Paginated<MyCard>>;
     }
 
-    getByCardId(cardId: string): Observable<MyCard | null> {
-      return this.repository.getAll(1, 1, {card: cardId}).pipe(
+    getByCardId(cardId: string, userId: string): Observable<MyCard | null> {
+      return this.repository.getAll(1, 1, {'card.id': cardId, 'user.id': userId}).pipe(
         map(res => Array.isArray(res) ? res[0] || null : res.data[0] || null)
       );
     }

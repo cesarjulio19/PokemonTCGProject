@@ -1,0 +1,35 @@
+
+ion-grid {
+    height: 100%;
+    overflow-y: auto;
+  
+    ion-row {
+      justify-content: center;
+    }
+  
+    ion-col {
+      display: flex;
+      justify-content: center; /* Centrar el contenido en el espacio disponible */
+      align-items: center;
+  
+      .card-item {
+        width: 100%; /* Asegurarse de que la card ocupe todo el ancho del ion-col */
+        height: auto;
+        padding: 8px;
+        ion-img {
+          max-width: 100%; /* Ajustar el tamaño de la imagen dentro de la tarjeta */
+          height: auto;
+          object-fit: contain; /* Mantener proporciones */
+        }
+      }
+    }
+  }
+  
+  ion-modal {
+    --width: 90%; /* Ajusta el ancho del modal */
+    --height: 80%; /* Ajusta la altura del modal */
+    --border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
