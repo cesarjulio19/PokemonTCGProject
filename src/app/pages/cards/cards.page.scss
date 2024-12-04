@@ -29,15 +29,17 @@ ion-grid {
     display: flex;
     gap: 8px; /* Espaciado entre botones */
     z-index: 1; /* Asegúrate de que los botones estén sobre la imagen */
+
+    ion-button {
+      --padding-start: 0;
+      --padding-end: 0;
+      --border-radius: 50%; /* Opcional: botones redondeados */
+      width: 40px; /* Ajusta el tamaño del botón */
+      height: 40px;
+    }
   }
   
-  ion-button {
-    --padding-start: 0;
-    --padding-end: 0;
-    --border-radius: 50%; /* Opcional: botones redondeados */
-    width: 40px; /* Ajusta el tamaño del botón */
-    height: 40px;
-  }
+
 
 
   ion-content {

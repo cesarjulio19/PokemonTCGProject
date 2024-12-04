@@ -10,7 +10,14 @@
 <ion-content [fullscreen]="true" [style.background-image]="'url(' + setImage + ')'" [style.background-size]="'cover'" [style.background-position]="'center'">
 
   <app-set-selector [sets$]="sets$" (setSelected)="onSetSelected($event)"></app-set-selector>
-
+  <div *ngIf="!user?.admin">
+    <ion-button color="danger" (click)="onAddCard()">
+      ADD CARD
+    </ion-button>
+    <ion-button color="warning">
+      ADD SET
+    </ion-button>
+  </div>
    <!-- Grid de Cartas -->
    <ion-grid>
     <ion-row>

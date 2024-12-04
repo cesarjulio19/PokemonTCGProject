@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { LanguageService } from './core/services/language.service';
 import { UsersService } from './core/services/impl/users.service';
 import { UserStrapi } from './core/models/user.model';
-import { lastValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable, lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -28,9 +28,10 @@ export class AppComponent implements OnInit{
   async ngOnInit(): Promise<void> {
     try{
       const userAuth = await this.authService.getCurrentUser();
+      
       if(userAuth){
         this.user = await lastValueFrom(this.usersSvc.getById(userAuth.id))
-
+        console.log(this.user,"user")
       }
       console.log(this.user)
     }catch(error){

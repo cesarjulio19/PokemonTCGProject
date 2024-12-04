@@ -61,7 +61,7 @@ export class CardsPage implements OnInit {
       if(userAuth){
         this.user = await lastValueFrom(this.usersSvc.getById(userAuth.id))
         
-        }
+      }
 
     }catch(error){
       console.error(error);
