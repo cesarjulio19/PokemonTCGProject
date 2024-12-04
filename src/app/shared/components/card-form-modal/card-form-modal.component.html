@@ -3,10 +3,10 @@
     <ion-icon slot="start" name="person-outline"></ion-icon>
     <ion-title>
       @if (mode=='edit') {
-        {{ 'PERSON.EDIT' | translate }}
+        {{ 'CARD.EDIT' | translate }}
       }
       @else {
-        {{ 'PERSON.NEW' | translate }}
+        {{ 'CARD.NEW' | translate }}
       }
     </ion-title>
     @if (isMobile) {
@@ -58,6 +58,29 @@
             <ion-text color="danger" *ngIf="type?.invalid && (type?.dirty || type?.touched)">
               <p *ngIf="type?.errors?.['required']">{{ 'CARD.ERRORS.TYPE_REQUIRED' | translate }}</p>
             </ion-text>
+            <!-- RARITY -->
+            <ion-item>
+              <ion-select [label]="'CARD.RARITY' | translate" label-placement="stacked" formControlName="rarity" [placeholder]="'CARD.RARITY_PLACEHOLDER' | translate">
+                <ion-select-option *ngFor="let rarity of raritys" [value]="rarity">{{ rarity }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-text color="danger" *ngIf="rarity?.invalid && (rarity?.dirty || rarity?.touched)">
+              <p *ngIf="rarity?.errors?.['required']">{{ 'CARD.ERRORS.RARITY_REQUIRED' | translate }}</p>
+            </ion-text>
+            <!-- SuperType -->
+            <ion-item>
+              <ion-select [label]="'CARD.SUPERTYPE' | translate" label-placement="stacked" formControlName="superType" [placeholder]="'CARD.SUPERTYPE_PLACEHOLDER' | translate">
+                <ion-select-option *ngFor="let superType of superTypes" [value]="superType">{{ superType }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-text color="danger" *ngIf="superType?.invalid && (superType?.dirty || superType?.touched)">
+              <p *ngIf="superType?.errors?.['required']">{{ 'CARD.ERRORS.SUPERTYPE_REQUIRED' | translate }}</p>
+            </ion-text>
+            <!-- Set -->
+            <ion-item>
+              <ion-label position="stacked">{{ 'CARD.SET' | translate }}</ion-label>
+              <app-search-set-selectable formControlName="setId"></app-search-set-selectable>
+            </ion-item>
           </ion-list>
         </ion-col>
       </ion-row>

@@ -102,6 +102,8 @@
         "RARITY":"Rareza",
         "SUPERTYPE":"Super Tipo",
         "SET":"Colección",
+        "EDIT":"Editar carta",
+        "NEW":"Nueva carta",
         "ERRORS":{
             "NAME_REQUIRED": "*Nombre requerido",
             "NAME_MIN_LENGTH": "*El nombre debe de tener al menos 2 caracteres",
@@ -111,7 +113,9 @@
             "SUPERTYPE_REQUIRED": "*Super tipo requirido",
             "SET_REQUIRED": "*Colección requirida"
         },
-        "TYPE_PLACEHOLDER": "Selecciona un tipo"
+        "TYPE_PLACEHOLDER": "Selecciona un tipo",
+        "RARITY_PLACEHOLDER": "Selecciona una rareza",
+        "SUPERTYPE_PLACEHOLDER": "Selecciona un super tipo"
 
 
     }

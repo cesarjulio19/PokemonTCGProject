@@ -35,7 +35,7 @@ export class CardFormModalComponent  implements OnInit {
     
       this.formGroup.controls['name'].setValue(_card.name);
       this.formGroup.controls['number'].setValue(_card.number);
-      this.formGroup.controls['picture'].setValue(_card.picture);
+      this.formGroup.controls['picture'].setValue(_card.picture?.url);
       this.formGroup.controls['type'].setValue(_card.type);
       this.formGroup.controls['rarity'].setValue(_card.rarity);
       this.formGroup.controls['superType'].setValue(_card.superType);

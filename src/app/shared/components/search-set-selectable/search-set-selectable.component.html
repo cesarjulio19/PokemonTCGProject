@@ -4,8 +4,8 @@
       <ion-text *ngIf="!setSelected && !disabled">{{ 'SEARCH_SET_SELECTABLE.SELECT_SET' | translate }}</ion-text>
       <ion-text *ngIf="!setSelected && disabled">{{ 'SEARCH_SET_SELECTABLE.NONE' | translate }}</ion-text>
       <ion-avatar class="ion-margin-end" slot="start" *ngIf="setSelected" >
-        <ion-img *ngIf="setSelected.picture" [src]="setSelected.picture"></ion-img>
-        <img *ngIf="!setSelected?.picture" alt="Silhouette of a person's head" src="/assets/images/fondo.jpg" />
+        <ion-img *ngIf="setSelected.picture?.url" [src]="setSelected.picture?.url"></ion-img>
+        <img *ngIf="!setSelected?.picture?.url" alt="Silhouette of a person's head" src="/assets/images/fondo.jpg" />
       </ion-avatar> 
       <ion-text *ngIf="setSelected">{{setSelected.name}}</ion-text>
     </div>
@@ -31,8 +31,8 @@
             </ion-item>
             <ion-item *ngFor="let set of sets$ | async" button (click)="onSetClicked(popover, set)">
               <ion-avatar slot="start">
-                <ion-img *ngIf="set.picture" [src]="set.picture"></ion-img>
-                <img *ngIf="!set.picture" alt="Silhouette of a person's head" src="/assets/images/fondo.jpg" />
+                <ion-img *ngIf="set.picture?.url" [src]="set.picture?.url"></ion-img>
+                <img *ngIf="!set.picture?.url" alt="Silhouette of a person's head" src="/assets/images/fondo.jpg" />
               </ion-avatar> 
               <ion-text >{{set.name}} </ion-text>
             </ion-item>

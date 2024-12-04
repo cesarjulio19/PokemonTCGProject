@@ -101,6 +101,8 @@
   "RARITY":"Rarity",
   "SUPERTYPE":"Super Type",
   "SET":"Set",
+  "EDIT":"Edit card",
+  "NEW":"New card",
   "ERRORS":{
     "NAME_REQUIRED": "*Name required",
     "NAME_MIN_LENGTH": "*The name must be at least two characters",
@@ -111,7 +113,9 @@
     "SET_REQUIRED": "*Set required"
   },
 
-  "TYPE_PLACEHOLDER": "Select a type"
+  "TYPE_PLACEHOLDER": "Select a type",
+  "RARITY_PLACEHOLDER": "Select a rarity",
+  "SUPERTYPE_PLACEHOLDER": "Select a super type"
 
 
 }
