@@ -33,6 +33,7 @@ import { PacksMappingStrapi } from './impl/packs-mapping-strapi.service';
 import { Pack } from '../models/pack.model';
 import { UserStrapi } from '../models/user.model';
 import { UsersMappingStrapi } from './impl/users-mapping-strapi.service';
+import { UsersService } from '../services/impl/users.service';
 export function createBaseRepositoryFactory<T extends Model>(
   token: InjectionToken<IBaseRepository<T>>,
   dependencies:any[]): FactoryProvider {
@@ -147,7 +148,7 @@ export const AuthMappingFactory: FactoryProvider = createBaseAuthMappingFactory(
 
 export const AuthenticationServiceFactory:FactoryProvider = {
   provide: BaseAuthenticationService,
-  useFactory: (backend:string, signIn:string, signUp:string, meUrl:string, mapping:IAuthMapping, http:HttpClient) => {
+  useFactory: (backend:string, signIn:string, signUp:string, meUrl:string, mapping:IAuthMapping, http:HttpClient,userService:UsersService ) => {
     switch(backend){
       case 'http':
         throw new Error("BACKEND NOT IMPLEMENTED");
@@ -156,13 +157,13 @@ export const AuthenticationServiceFactory:FactoryProvider = {
       case 'json-server':
         throw new Error("BACKEND NOT IMPLEMENTED");
       case 'strapi':
-        return new StrapiAuthenticationService(signIn, signUp, meUrl, mapping, http);
+        return new StrapiAuthenticationService(signIn, signUp, meUrl, mapping, http, userService);
       default:
         throw new Error("BACKEND NOT IMPLEMENTED");
     }
     
   },
-  deps: [BACKEND_TOKEN, AUTH_SIGN_IN_API_URL_TOKEN, AUTH_SIGN_UP_API_URL_TOKEN, AUTH_ME_API_URL_TOKEN, AUTH_MAPPING_TOKEN, HttpClient]
+  deps: [BACKEND_TOKEN, AUTH_SIGN_IN_API_URL_TOKEN, AUTH_SIGN_UP_API_URL_TOKEN, AUTH_ME_API_URL_TOKEN, AUTH_MAPPING_TOKEN, HttpClient,USERS_REPOSITORY_TOKEN]
 };
 
 export const MediaServiceFactory:FactoryProvider = {

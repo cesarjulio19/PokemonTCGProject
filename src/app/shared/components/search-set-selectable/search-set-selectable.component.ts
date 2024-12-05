@@ -45,7 +45,7 @@ export class SearchSetSelectableComponent  implements OnInit, ControlValueAccess
 
   private async loadSets(filter:string){
     this.page = 1;
-    this.setsSvc.getAll(this.page, this.pageSize).subscribe({
+    this.setsSvc.getAll(this.page, this.pageSize, {"name":filter}).subscribe({
       next:response=>{
         this._sets.next([...response.data]);
         this.page++;

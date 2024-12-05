@@ -19,7 +19,7 @@ export class AppComponent implements OnInit{
   constructor(public authSvc: BaseAuthenticationService,
     private router: Router,
     private languageService: LanguageService,
-    private authService:BaseAuthenticationService,
+    public authService:BaseAuthenticationService,
     private usersSvc:UsersService,
   ) {
     this.currentLang = this.languageService.getStoredLanguage();

@@ -7,6 +7,7 @@ import { IAuthMapping } from '../interfaces/auth-mapping.interface';
 import { StrapiMeResponse, StrapiSignInResponse, StrapiSignUpResponse } from './strapi-auth-mapping.service';
 import { IStrapiAuthentication } from '../interfaces/strapi-authentication.interface';
 import { User } from '../../models/auth.model';
+import { UsersService } from './users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class StrapiAuthenticationService extends BaseAuthenticationService imple
     @Inject(AUTH_SIGN_UP_API_URL_TOKEN) protected signUpUrl: string,
     @Inject(AUTH_ME_API_URL_TOKEN) protected meUrl: string,
     @Inject(AUTH_MAPPING_TOKEN) authMapping: IAuthMapping,
-    private httpClient:HttpClient
+    private httpClient:HttpClient,
+    private usersSvc:UsersService,
   ) {
     super(authMapping);
     this.jwt_token = localStorage.getItem('people-jwt-token');
@@ -52,25 +54,38 @@ export class StrapiAuthenticationService extends BaseAuthenticationService imple
   }
 
   signIn(authPayload: any): Observable<User> {
-    return this.httpClient.post<StrapiSignInResponse>(
+     return this.httpClient.post<StrapiSignInResponse>(
       `${this.signInUrl}`, 
-      this.authMapping.signInPayload(authPayload)).pipe(map((resp:StrapiSignInResponse)=>{
-      localStorage.setItem("people-jwt-token",resp.jwt);
-      this.jwt_token = resp.jwt;
-      this._authenticated.next(true);
-      this._user.next(this.authMapping.signIn(resp));
-      return this.authMapping.signIn(resp);
-    }));
+      this.authMapping.signInPayload(authPayload)).pipe(
+        switchMap(resp=>this.usersSvc.getById(resp.user.id.toString()).pipe(map(user=>{
+          const id = resp.user.id.toString()
+          localStorage.setItem("people-jwt-token",resp.jwt);
+          this.jwt_token = resp.jwt;
+          
+          this._authenticated.next(true);
+          this._user.next(this.authMapping.signIn(user));
+          const _user:User = {
+            id:user!.id,
+            email:user!.email,
+            username:user!.username,
+            admin:user!.admin,
+            picture:{...user!.picture},
+          }
+          return _user;
+      
+      }))));
   }
 
-  signUp(signUpPayload: any): Observable<User> {
+  signUp(signUpPayload: any):  Observable<Promise<User>>  {
     return this.httpClient.post<StrapiSignUpResponse>(
       `${this.signUpUrl}`, 
-      this.authMapping.signUpPayload(signUpPayload)).pipe(map((resp:StrapiSignUpResponse)=>{
+      this.authMapping.signUpPayload(signUpPayload)).pipe(map(async (resp:StrapiSignUpResponse)=>{
+        const id = resp.user.id.toString()
+        const user = await this.usersSvc.getById(id);
         localStorage.setItem("people-jwt-token",resp.jwt);
         this.jwt_token = resp.jwt;
         this._authenticated.next(true);
-        return this.authMapping.signUp(resp);
+        return this.authMapping.signUp(user);
       }));
   }
 
