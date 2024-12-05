@@ -1,15 +1,17 @@
 <ion-content class="card-modal" >
   <div class="modal-content" (click)="closeModal()">
     <div class="card-info">
-      <h2>{{ card.name }}</h2>
+      <h2>{{ card.name | capitalize }}</h2>
       <p><strong>{{ 'CARD_MODAL.NUMBER' | translate }}</strong> {{ card.number }}</p>
       <p><strong>{{ 'CARD_MODAL.TYPE' | translate }}</strong> {{ card.type }}</p>
-      <p><strong>{{ 'CARD_MODAL.RARITY' | translate }}</strong> {{ card.rarity }}</p>
+      <p><strong>{{ 'CARD_MODAL.RARITY' | translate }}</strong> {{ card.rarity | capitalize }}</p>
       <p><strong>{{ 'CARD_MODAL.SUPERTYPE' | translate }}</strong> {{ card.superType }}</p>
     </div>
     <div class="card-image">
-      <ion-img [src]="card.illustration" *ngIf="card.illustration"></ion-img>
-      <ion-img [src]="card.picture?.medium" *ngIf="!card.illustration"></ion-img>
+      <ion-img [src]="card.illustration" *ngIf="card.illustration && !card.picture?.url"></ion-img>
+      <ion-img [src]="card.picture?.small" *ngIf="card.illustration && card.picture?.url"></ion-img>
+      <ion-img [src]="card.picture?.small" *ngIf="!card.illustration && card.picture?.url" ></ion-img>
+      <ion-img src="/assets/images/pokeball.png" *ngIf="!card.illustration && !card.picture?.url" ></ion-img>
     </div>
   </div>
 </ion-content>

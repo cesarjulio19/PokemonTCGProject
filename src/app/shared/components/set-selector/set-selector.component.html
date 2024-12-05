@@ -1,8 +1,8 @@
 <ion-item>
-  <ion-label>{{ 'SET_SELECTOR.SET' | translate }}</ion-label>
-  <ion-select placeholder="{{ 'SET_SELECTOR.ALL_CARDS' | translate }}" [(ngModel)]="selectedSetId" (ionChange)="onSetSelected($event)">
+  <ion-label>{{ 'SET_SELECTOR.SET' | translate | capitalize}}</ion-label>
+  <ion-select placeholder="{{ 'SET_SELECTOR.ALL_CARDS' | translate | capitalize}}" [(ngModel)]="selectedSetId" (ionChange)="onSetSelected($event)">
     <ion-select-option [value]="-1">
-      {{ 'SET_SELECTOR.ALL_CARDS' | translate }}
+      {{ 'SET_SELECTOR.ALL_CARDS' | translate | capitalize}}
     </ion-select-option>
     <ion-select-option *ngFor="let set of (sets$ | async) " [value]="set.id">
       {{ set.name }}

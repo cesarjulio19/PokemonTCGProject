@@ -101,7 +101,7 @@ export class ProfilePage implements OnInit {
         await lastValueFrom(this.usersSvc.update(this.user.id, changedValues));
         
         const toast = await this.toastController.create({
-          message: await this.translateService.get('COMMON.SUCCESS.SAVE').toPromise(),
+          message: await this.translateService.get('PROFILE.SUCCESS_SAVE').toPromise(),
           duration: 3000,
           position: 'bottom'
         });
@@ -110,7 +110,7 @@ export class ProfilePage implements OnInit {
       }catch(error){
         console.error(error);
         const toast = await this.toastController.create({
-          message: await this.translateService.get('COMMON.ERROR.SAVE').toPromise(),
+          message: await this.translateService.get('PROFILE.ERROR_SAVE').toPromise(),
           duration: 3000,
           position: 'bottom'
         });

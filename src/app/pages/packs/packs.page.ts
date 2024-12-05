@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Card } from 'src/app/core/models/card.model';
@@ -37,7 +37,7 @@ export class PacksPage implements OnInit {
   pack$:Observable<Pack> = this._pack.asObservable();
   page:number = 1
   canOpen:boolean = true
-
+  isMobile: boolean = false;
   constructor(private cardsSvc:CardsService,
     private setsSvc:SetsService,
     private packsSvc:PacksService,
@@ -46,7 +46,10 @@ export class PacksPage implements OnInit {
     private translateService: TranslateService,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
-    ) { }
+    private platform: Platform,
+    ) {
+      this.isMobile = this.platform.is('ios') || this.platform.is('android');
+     }
 
   selectedSetId: string = '-1';
   //setImage:string | undefined = "/assets/images/fondo.jpg";

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ 'MENU.PACKS' | translate }}</ion-title>
+    <ion-title>{{ 'MENU.PACKS' | translate | capitalize}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,20 +12,42 @@
 
     <app-set-selector [sets$]="sets$" (setSelected)="onSetSelected($event)"></app-set-selector>
 
-     <div id="container-noOpen">
-      <ion-card>
-        <ion-img src="/assets/images/pokeball.png"></ion-img>
-      </ion-card>
+    @if (isMobile) {
+
+      
+      <div id="container-noOpen">
+        <ion-card>
+          <ion-img src="/assets/images/pokeball.png"></ion-img>
+        </ion-card>
+    
+        <ion-button (click)="openPack()" *ngIf="canOpen">
+          {{ 'PACK.OPEN_PACK' | translate | capitalize}}
+        </ion-button>
   
-      <ion-button (click)="openPack()" *ngIf="canOpen">
-        {{ 'PACK.OPEN_PACK' | translate }}
-      </ion-button>
+        <ion-button [disabled]="!canOpen" (click)="openPack()" *ngIf="!canOpen">
+          {{ 'PACK.CANT_OPEN' | translate | capitalize}}
+        </ion-button>
+      </div>
 
-      <ion-button [disabled]="!canOpen" (click)="openPack()" *ngIf="!canOpen">
-        {{ 'PACK.CANT_OPEN' | translate }}
-      </ion-button>
-    </div>
+      
 
+    }@else {
+
+      <div id="container-noOpen">
+        <ion-card>
+          <ion-img src="/assets/images/pokeball.png"></ion-img>
+        </ion-card>
+    
+        <ion-button (click)="openPack()" *ngIf="canOpen">
+          {{ 'PACK.OPEN_PACK' | translate | capitalize}}
+        </ion-button>
+  
+        <ion-button [disabled]="!canOpen" (click)="openPack()" *ngIf="!canOpen">
+          {{ 'PACK.CANT_OPEN' | translate | capitalize}}
+        </ion-button>
+      </div>
+
+    }
  
 
 </ion-content>

@@ -79,7 +79,9 @@
   "ERRORS":{
     "USERNAME_REQUIRED": "*Username is required",
     "USERNAME_MIN_LENGTH": "*The username must be at least two characters"
-  }
+  },
+  "SUCCESS_SAVE" : "The user has been successfully modified",
+  "ERROR_SAVE" : "Error modifying user"
 
 },
 
@@ -102,7 +104,7 @@
   "SUPERTYPE":"Super Type",
   "SET":"Set",
   "EDIT":"Edit card",
-  "NEW":"New card",
+  "NEW":"new card",
   "ERRORS":{
     "NAME_REQUIRED": "*Name required",
     "NAME_MIN_LENGTH": "*The name must be at least two characters",
@@ -115,9 +117,16 @@
 
   "TYPE_PLACEHOLDER": "Select a type",
   "RARITY_PLACEHOLDER": "Select a rarity",
-  "SUPERTYPE_PLACEHOLDER": "Select a super type"
+  "SUPERTYPE_PLACEHOLDER": "Select a super type",
+  "DELETE": "Do you want to delete this card?"
 
 
+},
+
+"SET":{
+  "NEW":"new set",
+  "UPDATE":"Update",
+  "CREATE":"Create"
 }
 
 

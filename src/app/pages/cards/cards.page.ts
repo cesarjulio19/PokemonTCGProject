@@ -1,16 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, InfiniteScrollCustomEvent, ModalController, SelectChangeEventDetail } from '@ionic/angular';
+import { AlertController, InfiniteScrollCustomEvent, ModalController, Platform, SelectChangeEventDetail } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, lastValueFrom, Observable, Subscription } from 'rxjs';
 import { Card } from 'src/app/core/models/card.model';
+import { Pack } from 'src/app/core/models/pack.model';
 import { Paginated } from 'src/app/core/models/paginated.model';
 import { Set } from 'src/app/core/models/set.model';
 import { UserStrapi } from 'src/app/core/models/user.model';
+import { BaseAuthenticationService } from 'src/app/core/services/impl/base-authentication.service';
+import { BaseMediaService } from 'src/app/core/services/impl/base-media.service';
 import { CardsService } from 'src/app/core/services/impl/cards.service';
+import { PacksService } from 'src/app/core/services/impl/packs.service';
 import { SetsService } from 'src/app/core/services/impl/sets.service';
 import { UsersService } from 'src/app/core/services/impl/users.service';
 import { CardFormModalComponent } from 'src/app/shared/components/card-form-modal/card-form-modal.component';
 import { CardModalComponent } from 'src/app/shared/components/card-modal/card-modal.component';
+import { SetFormModalComponent } from 'src/app/shared/components/set-form-modal/set-form-modal.component';
 
 @Component({
   selector: 'app-cards',
@@ -24,15 +29,22 @@ export class CardsPage implements OnInit {
 
   _sets:BehaviorSubject<Set[]> = new BehaviorSubject<Set[]>([]);
   sets$:Observable<Set[]> = this._sets.asObservable();
-  authService: any;
+  
   user?: UserStrapi | null;
-
+  isMobile: boolean = false;
   constructor(private cardsSvc:CardsService,
     private setsSvc:SetsService,
+    private packsSvc:PacksService,
     private modalCtrl: ModalController,
     private usersSvc:UsersService,
     private translate: TranslateService,
-    private alertCtrl: AlertController, ) { }
+    private alertCtrl: AlertController,
+    private authService:BaseAuthenticationService,
+    private platform: Platform,
+    private mediaService:BaseMediaService,
+     ) { 
+      this.isMobile = this.platform.is('ios') || this.platform.is('android');
+     }
 
    currentPage: number = 1;
    pageSize: number = 25;
@@ -217,10 +229,17 @@ export class CardsPage implements OnInit {
         sets: _sets
       })
     });
-    modal.onDidDismiss().then((response:any)=>{
+    modal.onDidDismiss().then(async (response:any)=>{
       switch (response.role) {
         case 'new':
-          this.cardsSvc.add(response.data).subscribe({
+          const dataNew = response.data
+          if(response.data.picture){
+            const base64Response = await fetch(dataNew.picture);
+            const blob = await base64Response.blob();
+            const uploadedBlob = await lastValueFrom(this.mediaService.upload(blob));
+            dataNew.picture = uploadedBlob[0];
+          }
+          this.cardsSvc.add(dataNew).subscribe({
             next:res=>{
               this.loadCards();
             },
@@ -228,7 +247,14 @@ export class CardsPage implements OnInit {
           });
           break;
         case 'edit':
-          this.cardsSvc.update(card!.id, response.data).subscribe({
+          const dataEdit = response.data
+          if(response.data.picture){
+            const base64Response = await fetch(dataEdit.picture);
+            const blob = await base64Response.blob();
+            const uploadedBlob = await lastValueFrom(this.mediaService.upload(blob));
+            dataEdit.picture = uploadedBlob[0];
+          }
+          this.cardsSvc.update(card!.id, dataEdit).subscribe({
             next:res=>{
               this.loadCards();
             },
@@ -248,7 +274,7 @@ export class CardsPage implements OnInit {
 
   async onDeleteCard(card: Card) {
     const alert = await this.alertCtrl.create({
-      header: await this.translate.get('PEOPLE.MESSAGES.DELETE_CONFIRM').toPromise(),
+      header: await this.translate.get('CARD.DELETE').toPromise(),
       buttons: [
         {
           text: 'Cancel',
@@ -271,6 +297,63 @@ export class CardsPage implements OnInit {
 
     await alert.present();
   }
+
+
+  async openSetFormModal() {
+    const modal = await this.modalCtrl.create({
+      component: SetFormModalComponent,
+    });
+  
+    await modal.present();
+  
+    // Captura los datos enviados desde el modal
+    const { data } = await modal.onDidDismiss();
+  
+    if (data) {
+      console.log('Datos recibidos del modal:', data);
+      this.addSet(data); // Llama a la función para añadir el set con los datos del formulario
+    }
+  }
+
+  async addSet(formData: any) {
+    console.log(formData.name,formData.picture)
+    const data = formData
+    if(data.picture){
+      const base64Response = await fetch(data.picture);
+      const blob = await base64Response.blob();
+      const uploadedBlob = await lastValueFrom(this.mediaService.upload(blob));
+      data.picture = uploadedBlob[0];
+
+    }
+    this.setsSvc.add(data).subscribe({
+      next:res=>{
+        let pack: any = {
+          name:res.name,
+          setId:res.id
+        }
+        this.packsSvc.add(pack).subscribe({
+          next:res =>{
+
+          }
+        })
+      },
+      error:err=>{}
+    });
+
+    this.setsSvc.getAll( ).subscribe({
+      next: (response: Set[]) => {
+        this._sets.next(response);
+      },
+      error: (err) => {
+        console.error('Error al obtener los conjuntos:', err);
+      }
+    });
+
+
+
+    
+  }
+  
 
  
 

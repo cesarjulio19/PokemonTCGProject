@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
+import { AlertController, InfiniteScrollCustomEvent, ModalController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Card } from 'src/app/core/models/card.model';
@@ -32,13 +32,17 @@ export class MyCardsPage implements OnInit {
   totalPages: number = 1;
   mycards:MyCard[] = [];
   user:any
-
+  isMobile: boolean = false;
   constructor(private mycardsSvc:MyCardsService,
     private cardsSvc:CardsService,
     private authService:BaseAuthenticationService,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
-    private translate: TranslateService,) { }
+    private translate: TranslateService,
+    private platform: Platform,
+  ) { 
+    this.isMobile = this.platform.is('ios') || this.platform.is('android');
+  }
 
   async ngOnInit() {
     try{

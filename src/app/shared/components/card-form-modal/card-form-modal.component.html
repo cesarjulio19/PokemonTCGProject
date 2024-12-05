@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-icon slot="start" name="person-outline"></ion-icon>
+    
     <ion-title>
       @if (mode=='edit') {
-        {{ 'CARD.EDIT' | translate }}
+        {{ 'CARD.EDIT' | translate | capitalize}}
       }
       @else {
-        {{ 'CARD.NEW' | translate }}
+        {{ 'CARD.NEW' | translate | capitalize}}
       }
     </ion-title>
     @if (isMobile) {
@@ -35,19 +35,19 @@
         <ion-col size="12" size-md="8">
           <ion-list>
             <ion-item>
-              <ion-input [label]="'CARD.NAME' | translate" label-placement="stacked"  type="text" formControlName="name"></ion-input>
+              <ion-input [label]="'CARD.NAME' | translate | capitalize" label-placement="stacked"  type="text" formControlName="name"></ion-input>
             </ion-item>
             <ion-text color="danger" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
-              <p *ngIf="name?.errors?.['required']">{{ 'CARD.ERRORS.NAME_REQUIRED' | translate }}</p>
-              <p *ngIf="name?.errors?.['minlength']">{{ 'CARD.ERRORS.NAME_MIN_LENGTH' | translate }}</p>
+              <p *ngIf="name?.errors?.['required']">{{ 'CARD.ERRORS.NAME_REQUIRED' | translate | capitalize}}</p>
+              <p *ngIf="name?.errors?.['minlength']">{{ 'CARD.ERRORS.NAME_MIN_LENGTH' | translate | capitalize}}</p>
             </ion-text>
 
             <!-- Number -->
             <ion-item>
-              <ion-input [label]="'CARD.NUMBER' | translate" label-placement="stacked" type="Number" formControlName="number"></ion-input>
+              <ion-input [label]="'CARD.NUMBER' | translate | capitalize" label-placement="stacked" type="Number" formControlName="number"></ion-input>
             </ion-item>
             <ion-text color="danger" *ngIf="number?.invalid && (number?.dirty || number?.touched)">
-              <p *ngIf="number?.errors?.['required']">{{ 'CARD.ERRORS.NUMBER_REQUIRED' | translate }}</p>
+              <p *ngIf="number?.errors?.['required']">{{ 'CARD.ERRORS.NUMBER_REQUIRED' | translate | capitalize}}</p>
             </ion-text>
             <!-- TYPE -->
             <ion-item>
@@ -56,29 +56,29 @@
               </ion-select>
             </ion-item>
             <ion-text color="danger" *ngIf="type?.invalid && (type?.dirty || type?.touched)">
-              <p *ngIf="type?.errors?.['required']">{{ 'CARD.ERRORS.TYPE_REQUIRED' | translate }}</p>
+              <p *ngIf="type?.errors?.['required']">{{ 'CARD.ERRORS.TYPE_REQUIRED' | translate | capitalize}}</p>
             </ion-text>
             <!-- RARITY -->
             <ion-item>
-              <ion-select [label]="'CARD.RARITY' | translate" label-placement="stacked" formControlName="rarity" [placeholder]="'CARD.RARITY_PLACEHOLDER' | translate">
+              <ion-select [label]="'CARD.RARITY' | translate | capitalize" label-placement="stacked" formControlName="rarity" [placeholder]="'CARD.RARITY_PLACEHOLDER' | translate">
                 <ion-select-option *ngFor="let rarity of raritys" [value]="rarity">{{ rarity }}</ion-select-option>
               </ion-select>
             </ion-item>
             <ion-text color="danger" *ngIf="rarity?.invalid && (rarity?.dirty || rarity?.touched)">
-              <p *ngIf="rarity?.errors?.['required']">{{ 'CARD.ERRORS.RARITY_REQUIRED' | translate }}</p>
+              <p *ngIf="rarity?.errors?.['required']">{{ 'CARD.ERRORS.RARITY_REQUIRED' | translate | capitalize}}</p>
             </ion-text>
             <!-- SuperType -->
             <ion-item>
-              <ion-select [label]="'CARD.SUPERTYPE' | translate" label-placement="stacked" formControlName="superType" [placeholder]="'CARD.SUPERTYPE_PLACEHOLDER' | translate">
+              <ion-select [label]="'CARD.SUPERTYPE' | translate | capitalize" label-placement="stacked" formControlName="superType" [placeholder]="'CARD.SUPERTYPE_PLACEHOLDER' | translate">
                 <ion-select-option *ngFor="let superType of superTypes" [value]="superType">{{ superType }}</ion-select-option>
               </ion-select>
             </ion-item>
             <ion-text color="danger" *ngIf="superType?.invalid && (superType?.dirty || superType?.touched)">
-              <p *ngIf="superType?.errors?.['required']">{{ 'CARD.ERRORS.SUPERTYPE_REQUIRED' | translate }}</p>
+              <p *ngIf="superType?.errors?.['required']">{{ 'CARD.ERRORS.SUPERTYPE_REQUIRED' | translate | capitalize}}</p>
             </ion-text>
             <!-- Set -->
             <ion-item>
-              <ion-label position="stacked">{{ 'CARD.SET' | translate }}</ion-label>
+              <ion-label position="stacked">{{ 'CARD.SET' | translate | capitalize}}</ion-label>
               <app-search-set-selectable formControlName="setId"></app-search-set-selectable>
             </ion-item>
           </ion-list>
@@ -88,7 +88,13 @@
     
     <div class="ion-padding">
       <ion-button [disabled]="!formGroup.valid || !formGroup.dirty" expand="full" type="submit">
-        {{ 'PROFILE.UPDATE' | translate }}
+        
+        @if (mode=='edit') {
+          {{ 'PROFILE.UPDATE' | translate | capitalize}}
+        }
+        @else {
+          {{ 'SET.CREATE' | translate | capitalize}}
+        }
       </ion-button>
     </div>
   </form>

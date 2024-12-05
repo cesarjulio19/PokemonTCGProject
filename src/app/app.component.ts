@@ -23,6 +23,8 @@ export class AppComponent implements OnInit{
     private usersSvc:UsersService,
   ) {
     this.currentLang = this.languageService.getStoredLanguage();
+
+    
   }
 
   async ngOnInit(): Promise<void> {

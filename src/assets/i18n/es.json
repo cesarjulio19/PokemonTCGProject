@@ -80,7 +80,9 @@
         "ERRORS":{
             "USERNAME_REQUIRED": "*El nombre de usuario es obligatorio",
             "USERNAME_MIN_LENGTH": "*El nombre de usuario debe tener al menos dos caracteres"
-        }
+        },
+        "SUCCESS_SAVE" : "El usuario se ha modificado correctamente",
+        "ERROR_SAVE" : "Error al modificar el usuario"
 
     },
 
@@ -115,10 +117,19 @@
         },
         "TYPE_PLACEHOLDER": "Selecciona un tipo",
         "RARITY_PLACEHOLDER": "Selecciona una rareza",
-        "SUPERTYPE_PLACEHOLDER": "Selecciona un super tipo"
+        "SUPERTYPE_PLACEHOLDER": "Selecciona un super tipo",
+        "DELETE": "¿Deseas borrar esta carta?"
 
 
+    },
+
+    "SET":{
+        "NEW":"Nueva colección",
+        "UPDATE":"Modificar",
+        "CREATE":"Crear"
     }
+
+    
 }
 
 

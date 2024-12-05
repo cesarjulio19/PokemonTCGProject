@@ -49,7 +49,7 @@ export class CardFormModalComponent  implements OnInit {
       this.formGroup = this.fb.group({
         name:['', [Validators.required, Validators.minLength(2)]],
         number:['', [Validators.required]],
-        picture: ['', [Validators.required]],
+        picture: [''],
         type:['', [Validators.required]],
         rarity:['', [Validators.required]],
         superType:['', [Validators.required]],

@@ -5,8 +5,10 @@
   <ion-row>
     <ion-col size="6" *ngFor="let card of cards">
       <ion-card >
-        <ion-img [src]="card.illustration" *ngIf="card.illustration"></ion-img>
-        <ion-img [src]="card.picture?.small" *ngIf="!card.illustration" ></ion-img>
+        <ion-img [src]="card.illustration" *ngIf="card.illustration && !card.picture?.url"></ion-img>
+        <ion-img [src]="card.picture?.small" *ngIf="card.illustration && card.picture?.url"></ion-img>
+        <ion-img [src]="card.picture?.small" *ngIf="!card.illustration && card.picture?.url" ></ion-img>
+        <ion-img src="/assets/images/pokeball.png" *ngIf="!card.illustration && !card.picture?.url" ></ion-img>
       </ion-card>
     </ion-col>
   </ion-row>

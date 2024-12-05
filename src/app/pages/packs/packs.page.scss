@@ -1,60 +1,51 @@
-ion-grid {
-    --ion-grid-padding: 10px; /* Opcional: ajustar espaciado entre elementos */
-  }
-  
-  ion-row {
-    justify-content: center; /* Centra las cartas si el número es impar */
-  }
-  
+#container-noOpen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+
   ion-card {
-    width: 300px;
-    height: 400px;
+    width: 450px;
+    height: 650px;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    position: relative; /* Para mantener el botón de eliminar */
-  }
-  
-  ion-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* O usa contain si prefieres no recortar */
-  }
-
-  ion-content {
-    --background: none; /* Elimina el fondo oscuro predefinido */
-  
-  }
-
-  #back{
-    align-self: center;
-  }
-
-  #container-noOpen {
-  display: flex;
-  flex-direction: column; /* Alinea los elementos en columna */
-  align-items: center; /* Centra horizontalmente */
-  justify-content: center; /* Centra verticalmente */
-  height: 100vh; /* Ocupa toda la altura de la pantalla */
-  text-align: center; /* Centra texto e imágenes en los elementos secundarios */
-
-  ion-card {
-    width: 450px; /* Ancho personalizado para la tarjeta */
-    height: 650px; /* Altura personalizada para la tarjeta */
-    display: flex;
-    justify-content: center; /* Centra el contenido dentro de la tarjeta */
-    align-items: center;
 
     ion-img {
-      width: 100%; /* Imagen ajustada al ancho de la tarjeta */
-      height: 100%; /* Imagen ajustada a la altura de la tarjeta */
-      object-fit: cover; /* Asegura que la imagen se escale sin deformarse */
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Ajuste automático sin recortar */
     }
   }
 
   ion-button {
-    margin-top: 16px; /* Espacio entre el botón y la tarjeta */
-    align-self: center; /* Asegura que el botón esté centrado */
+    margin-top: 16px;
+    align-self: center;
+  }
+}
+
+ion-content {
+  --background: none; /* Elimina el fondo oscuro predefinido */
+
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  #container-noOpen {
+    ion-card {
+      width: 300px; /* Ajusta el ancho de la tarjeta */
+      height: 400px; /* Ajusta la altura de la tarjeta */
+    }
+
+    ion-img {
+      object-fit: cover; /* Cambia a cover para un mejor ajuste en móvil */
+    }
+
+    ion-button {
+      font-size: 14px; /* Ajusta el tamaño de texto de los botones */
+      margin-top: 12px;
+    }
   }
 }

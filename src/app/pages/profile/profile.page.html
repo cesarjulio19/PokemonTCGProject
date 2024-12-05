@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ 'PROFILE.TITLE' | translate }}</ion-title>
+    <ion-title>{{ 'PROFILE.TITLE' | translate | capitalize}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -23,11 +23,11 @@
         <ion-col size="12" size-md="8">
           <ion-list>
             <ion-item>
-              <ion-input [label]="'PROFILE.USERNAME' | translate" label-placement="stacked"  type="text" formControlName="username"></ion-input>
+              <ion-input [label]="'PROFILE.USERNAME' | translate | capitalize" label-placement="stacked"  type="text" formControlName="username"></ion-input>
             </ion-item>
             <ion-text color="danger" *ngIf="username?.invalid && (username?.dirty || username?.touched)">
-              <p *ngIf="username?.errors?.['required']">{{ 'PROFILE.ERRORS.USERNAME_REQUIRED' | translate }}</p>
-              <p *ngIf="username?.errors?.['minlength']">{{ 'PROFILE.ERRORS.USERNAME_MIN_LENGTH' | translate }}</p>
+              <p *ngIf="username?.errors?.['required']">{{ 'PROFILE.ERRORS.USERNAME_REQUIRED' | translate | capitalize}}</p>
+              <p *ngIf="username?.errors?.['minlength']">{{ 'PROFILE.ERRORS.USERNAME_MIN_LENGTH' | translate | capitalize}}</p>
             </ion-text>
 
             <!-- Email -->
@@ -35,8 +35,8 @@
               <ion-input [label]="'PROFILE.EMAIL' | translate" label-placement="stacked" type="email" formControlName="email"></ion-input>
             </ion-item>
             <ion-text color="danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-              <p *ngIf="email?.errors?.['required']">{{ 'REGISTER.ERRORS.EMAIL_REQUIRED' | translate }}</p>
-              <p *ngIf="email?.errors?.['email']">{{ 'REGISTER.ERRORS.EMAIL_INCORRECT' | translate }}</p>
+              <p *ngIf="email?.errors?.['required']">{{ 'REGISTER.ERRORS.EMAIL_REQUIRED' | translate | capitalize}}</p>
+              <p *ngIf="email?.errors?.['email']">{{ 'REGISTER.ERRORS.EMAIL_INCORRECT' | translate | capitalize}}</p>
             </ion-text>
           </ion-list>
         </ion-col>
@@ -45,7 +45,7 @@
     
     <div class="ion-padding">
       <ion-button [disabled]="!formGroup.valid || !formGroup.dirty" expand="full" type="submit">
-        {{ 'PROFILE.UPDATE' | translate }}
+        {{ 'PROFILE.UPDATE' | translate | capitalize}}
       </ion-button>
     </div>
   </form>
