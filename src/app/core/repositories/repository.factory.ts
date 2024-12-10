@@ -3,23 +3,16 @@ import { FactoryProvider, InjectionToken } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseRepositoryHttpService } from './impl/base-repository-http.service';
 import { IBaseRepository } from './intefaces/base-repository.interface';
-import { Person } from '../models/person.model';
-import { AUTH_MAPPING_TOKEN, AUTH_ME_API_URL_TOKEN, AUTH_SIGN_IN_API_URL_TOKEN, AUTH_SIGN_UP_API_URL_TOKEN, BACKEND_TOKEN, CARDS_API_URL_TOKEN, CARDS_REPOSITORY_MAPPING_TOKEN, CARDS_REPOSITORY_TOKEN, CARDS_RESOURCE_NAME_TOKEN, GROUPS_API_URL_TOKEN, GROUPS_REPOSITORY_MAPPING_TOKEN, GROUPS_REPOSITORY_TOKEN, GROUPS_RESOURCE_NAME_TOKEN, MYCARDS_API_URL_TOKEN, MYCARDS_REPOSITORY_MAPPING_TOKEN, MYCARDS_REPOSITORY_TOKEN, MYCARDS_RESOURCE_NAME_TOKEN, PACKS_API_URL_TOKEN, PACKS_REPOSITORY_MAPPING_TOKEN, PACKS_REPOSITORY_TOKEN, PACKS_RESOURCE_NAME_TOKEN, PEOPLE_API_URL_TOKEN, PEOPLE_REPOSITORY_MAPPING_TOKEN, PEOPLE_REPOSITORY_TOKEN, PEOPLE_RESOURCE_NAME_TOKEN, SETS_API_URL_TOKEN, SETS_REPOSITORY_MAPPING_TOKEN, SETS_REPOSITORY_TOKEN, SETS_RESOURCE_NAME_TOKEN, UPLOAD_API_URL_TOKEN, USERS_API_URL_TOKEN, USERS_REPOSITORY_MAPPING_TOKEN, USERS_REPOSITORY_TOKEN, USERS_RESOURCE_NAME_TOKEN } from './repository.tokens';
+import { AUTH_MAPPING_TOKEN, AUTH_ME_API_URL_TOKEN, AUTH_SIGN_IN_API_URL_TOKEN, AUTH_SIGN_UP_API_URL_TOKEN, BACKEND_TOKEN, CARDS_API_URL_TOKEN, CARDS_REPOSITORY_MAPPING_TOKEN, CARDS_REPOSITORY_TOKEN, CARDS_RESOURCE_NAME_TOKEN, MYCARDS_API_URL_TOKEN, MYCARDS_REPOSITORY_MAPPING_TOKEN, MYCARDS_REPOSITORY_TOKEN, MYCARDS_RESOURCE_NAME_TOKEN, PACKS_API_URL_TOKEN, PACKS_REPOSITORY_MAPPING_TOKEN, PACKS_REPOSITORY_TOKEN, PACKS_RESOURCE_NAME_TOKEN, SETS_API_URL_TOKEN, SETS_REPOSITORY_MAPPING_TOKEN, SETS_REPOSITORY_TOKEN, SETS_RESOURCE_NAME_TOKEN, UPLOAD_API_URL_TOKEN, USERS_API_URL_TOKEN, USERS_REPOSITORY_MAPPING_TOKEN, USERS_REPOSITORY_TOKEN, USERS_RESOURCE_NAME_TOKEN } from './repository.tokens';
 import { BaseRespositoryLocalStorageService } from './impl/base-repository-local-storage.service';
 import { Model } from '../models/base.model';
 import { IBaseMapping } from './intefaces/base-mapping.interface';
 import { JsonServerRepositoryService } from './impl/json-server-repository.service';
-import { Group } from '../models/group.model';
 import { StrapiRepositoryService } from './impl/strapi-repository.service';
 import { BaseAuthenticationService } from '../services/impl/base-authentication.service';
 import { IAuthMapping } from '../services/interfaces/auth-mapping.interface';
 import { StrapiAuthenticationService } from '../services/impl/strapi-authentication.service';
-import { PeopleLocalStorageMapping } from './impl/people-mapping-local-storage.service';
-import { PeopleMappingJsonServer } from './impl/people-mapping-json-server.service';
-import { PeopleMappingStrapi } from './impl/people-mapping-strapi.service';
 import { StrapiAuthMappingService } from '../services/impl/strapi-auth-mapping.service';
-import { GroupsMappingJsonServer } from './impl/groups-mapping-json-server.service';
-import { GroupsMappingStrapi } from './impl/groups-mapping-strapi.service';
 import { IStrapiAuthentication } from '../services/interfaces/strapi-authentication.interface';
 import { StrapiMediaService } from '../services/impl/strapi-media.service';
 import { BaseMediaService } from '../services/impl/base-media.service';
@@ -148,7 +141,7 @@ export const AuthMappingFactory: FactoryProvider = createBaseAuthMappingFactory(
 
 export const AuthenticationServiceFactory:FactoryProvider = {
   provide: BaseAuthenticationService,
-  useFactory: (backend:string, signIn:string, signUp:string, meUrl:string, mapping:IAuthMapping, http:HttpClient,userService:UsersService ) => {
+  useFactory: (backend:string, signIn:string, signUp:string, meUrl:string, mapping:IAuthMapping, http:HttpClient ) => {
     switch(backend){
       case 'http':
         throw new Error("BACKEND NOT IMPLEMENTED");
@@ -157,13 +150,13 @@ export const AuthenticationServiceFactory:FactoryProvider = {
       case 'json-server':
         throw new Error("BACKEND NOT IMPLEMENTED");
       case 'strapi':
-        return new StrapiAuthenticationService(signIn, signUp, meUrl, mapping, http, userService);
+        return new StrapiAuthenticationService(signIn, signUp, meUrl, mapping, http);
       default:
         throw new Error("BACKEND NOT IMPLEMENTED");
     }
     
   },
-  deps: [BACKEND_TOKEN, AUTH_SIGN_IN_API_URL_TOKEN, AUTH_SIGN_UP_API_URL_TOKEN, AUTH_ME_API_URL_TOKEN, AUTH_MAPPING_TOKEN, HttpClient,USERS_REPOSITORY_TOKEN]
+  deps: [BACKEND_TOKEN, AUTH_SIGN_IN_API_URL_TOKEN, AUTH_SIGN_UP_API_URL_TOKEN, AUTH_ME_API_URL_TOKEN, AUTH_MAPPING_TOKEN, HttpClient]
 };
 
 export const MediaServiceFactory:FactoryProvider = {

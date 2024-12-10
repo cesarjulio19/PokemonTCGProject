@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { IBaseMapping } from "../intefaces/base-mapping.interface";
 import { Paginated } from "../../models/paginated.model";
-import { Person } from "../../models/person.model";
 import { StrapiMedia } from "../../services/impl/strapi-media.service";
 import { Card } from "../../models/card.model";
 

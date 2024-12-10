@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { timer } from 'rxjs';
 import { BaseAuthenticationService } from 'src/app/core/services/impl/base-authentication.service';
 import { IonicModule } from '@ionic/angular';
+import { AnimationOptions, LottieComponent, provideLottieOptions } from 'ngx-lottie';
+import player, { AnimationItem } from 'lottie-web';
 
 
 
@@ -11,9 +13,17 @@ import { IonicModule } from '@ionic/angular';
   templateUrl: './splash.page.html',
   styleUrls: ['./splash.page.scss'],
   standalone:true,
-  imports: [IonicModule]
+  imports: [IonicModule, LottieComponent]
 })
 export class SplashPage implements OnInit {
+
+  options: AnimationOptions = {
+    path: '/assets/lotties/splash.json', // Ruta a tu archivo de animación
+  };
+
+  onAnimationCreated(animationItem: AnimationItem): void {
+    console.log('Animación creada:', animationItem);
+  }
 
 
   constructor(

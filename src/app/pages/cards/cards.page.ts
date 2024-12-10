@@ -32,6 +32,7 @@ export class CardsPage implements OnInit {
   
   user?: UserStrapi | null;
   isMobile: boolean = false;
+  isLoading: boolean = false;
   constructor(private cardsSvc:CardsService,
     private setsSvc:SetsService,
     private packsSvc:PacksService,
@@ -87,6 +88,14 @@ export class CardsPage implements OnInit {
 
   onSetSelected(selectedSetId: string) {
     this.selectedSetId = selectedSetId;
+    this.setsSvc.getAll( ).subscribe({
+      next: (response: Set[]) => {
+        this._sets.next(response);
+      },
+      error: (err) => {
+        console.error('Error al obtener los conjuntos:', err);
+      }
+    });
     if(selectedSetId != "-1"){
 
       this.setsSvc.getById(selectedSetId).subscribe({
@@ -218,6 +227,17 @@ export class CardsPage implements OnInit {
     this.selectedCard = card;
   }
 
+  async openSetEdit(setId: string) {
+    this.setsSvc.getById(setId).subscribe({
+      next:async res =>{
+        if(res){
+          await this.presentModalSet('edit', res);
+        }
+
+      }
+    })
+  }
+
   private async presentModalCard(mode:'new'|'edit', card:Card|undefined=undefined){
     let _sets:Set[] = await lastValueFrom(this.setsSvc.getAll())
     const modal = await this.modalCtrl.create({
@@ -268,11 +288,121 @@ export class CardsPage implements OnInit {
     await modal.present();
   }
 
+  private async presentModalSet(mode:'new'|'edit', set:Set|undefined=undefined){
+    const modal = await this.modalCtrl.create({
+      component:SetFormModalComponent,
+      componentProps:(mode=='edit'?{
+        set: set,
+      }:{
+        
+      })
+    });
+    modal.onDidDismiss().then(async (response:any)=>{
+      switch (response.role) {
+        case 'new':
+          const dataNew = response.data
+          if(response.data.picture){
+            const base64Response = await fetch(dataNew.picture);
+            const blob = await base64Response.blob();
+            const uploadedBlob = await lastValueFrom(this.mediaService.upload(blob));
+            dataNew.picture = uploadedBlob[0];
+          }
+          this.setsSvc.add(dataNew).subscribe({
+            next:res=>{
+              let pack: any = {
+                name:res.name,
+                setId:res.id
+              }
+              this.packsSvc.add(pack).subscribe({
+                next:res =>{
+      
+                }
+              })
+            },
+            error:err=>{}
+          });
+      
+          this.setsSvc.getAll( ).subscribe({
+            next: (response: Set[]) => {
+              this._sets.next(response);
+            },
+            error: (err) => {
+              console.error('Error al obtener los conjuntos:', err);
+            }
+          });
+
+          break;
+        case 'edit':
+          const dataEdit = response.data
+          if(response.data.picture){
+            const base64Response = await fetch(dataEdit.picture);
+            const blob = await base64Response.blob();
+            const uploadedBlob = await lastValueFrom(this.mediaService.upload(blob));
+            dataEdit.picture = uploadedBlob[0];
+          }
+
+          if(response.data.name){
+            this.setsSvc.update(set!.id, dataEdit).subscribe({
+              next:resSet=>{
+                this.packsSvc.getBySetId(resSet!.id).subscribe({
+                  next:res =>{
+                      const pack:any = {
+                        name:response.data.name
+                      }
+                      this.packsSvc.update(res!.id,pack).subscribe({
+                        next:respack =>{
+
+                        }
+                      })
+                  }
+                })
+              },
+              error:err=>{}
+            });
+
+          }else{
+            this.setsSvc.update(set!.id,dataEdit).subscribe({
+              next: res =>{
+
+              }
+            })
+          }
+          this.setsSvc.getAll( ).subscribe({
+            next: (response: Set[]) => {
+              this._sets.next(response);
+            },
+            error: (err) => {
+              console.error('Error al obtener los conjuntos:', err);
+            }
+          });
+          break;
+        default:
+          break;
+      }
+    });
+    await modal.present();
+  }
+
+
   async onAddCard(){
     await this.presentModalCard('new');
   }
 
+  async onAddSet(){
+    await this.presentModalSet('new');
+  }
+
+
+
   async onDeleteCard(card: Card) {
+
+    this.isLoading = true;
+
+    setTimeout(() => {
+      this.isLoading = false;
+      console.log('Operation completed');
+    }, 3000);
+    
     const alert = await this.alertCtrl.create({
       header: await this.translate.get('CARD.DELETE').toPromise(),
       buttons: [
@@ -298,61 +428,56 @@ export class CardsPage implements OnInit {
     await alert.present();
   }
 
+  async onDeleteSet(setId: string) {
+    const alert = await this.alertCtrl.create({
+      header: await this.translate.get('SET.DELETE_MESSAGE').toPromise(),
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'OK',
+          role: 'yes',
+          handler: () => {
+            this.packsSvc.getBySetId(setId).subscribe({
+              next:res=>{
+                if(res){
+                  this.packsSvc.delete(res.id).subscribe({
+                    next:res=>{
 
-  async openSetFormModal() {
-    const modal = await this.modalCtrl.create({
-      component: SetFormModalComponent,
-    });
-  
-    await modal.present();
-  
-    // Captura los datos enviados desde el modal
-    const { data } = await modal.onDidDismiss();
-  
-    if (data) {
-      console.log('Datos recibidos del modal:', data);
-      this.addSet(data); // Llama a la función para añadir el set con los datos del formulario
-    }
-  }
+                    }
+                  })
+                }
+              }
+            })
 
-  async addSet(formData: any) {
-    console.log(formData.name,formData.picture)
-    const data = formData
-    if(data.picture){
-      const base64Response = await fetch(data.picture);
-      const blob = await base64Response.blob();
-      const uploadedBlob = await lastValueFrom(this.mediaService.upload(blob));
-      data.picture = uploadedBlob[0];
+            this.setsSvc.delete(setId).subscribe({
+              next: response => {
+                this.loadCards();
+              },
+              error: err => {}
+            });
 
-    }
-    this.setsSvc.add(data).subscribe({
-      next:res=>{
-        let pack: any = {
-          name:res.name,
-          setId:res.id
-        }
-        this.packsSvc.add(pack).subscribe({
-          next:res =>{
+            this.setsSvc.getAll( ).subscribe({
+              next: (response: Set[]) => {
+                this._sets.next(response);
+              },
+              error: (err) => {
+                console.error('Error al obtener los conjuntos:', err);
+              }
+            });
 
           }
-        })
-      },
-      error:err=>{}
+        }
+      ]
     });
 
-    this.setsSvc.getAll( ).subscribe({
-      next: (response: Set[]) => {
-        this._sets.next(response);
-      },
-      error: (err) => {
-        console.error('Error al obtener los conjuntos:', err);
-      }
-    });
-
-
-
-    
+    await alert.present();
   }
+
+
+ 
   
 
  

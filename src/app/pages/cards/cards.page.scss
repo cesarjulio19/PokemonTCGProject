@@ -14,6 +14,9 @@ ion-grid {
     align-items: center;
     overflow: hidden;
     position: relative; /* Para mantener el botón de eliminar */
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 4px solid black;
   }
   
   ion-img {

@@ -20,7 +20,7 @@
           <ion-img src="/assets/images/pokeball.png"></ion-img>
         </ion-card>
     
-        <ion-button (click)="openPack()" *ngIf="canOpen">
+        <ion-button [appBlockButton]="isLoading" (click)="openPack()" *ngIf="canOpen">
           {{ 'PACK.OPEN_PACK' | translate | capitalize}}
         </ion-button>
   
@@ -38,7 +38,7 @@
           <ion-img src="/assets/images/pokeball.png"></ion-img>
         </ion-card>
     
-        <ion-button (click)="openPack()" *ngIf="canOpen">
+        <ion-button [appBlockButton]="isLoading" (click)="openPack()" *ngIf="canOpen">
           {{ 'PACK.OPEN_PACK' | translate | capitalize}}
         </ion-button>
   

@@ -5,6 +5,7 @@ import { LanguageService } from './core/services/language.service';
 import { UsersService } from './core/services/impl/users.service';
 import { UserStrapi } from './core/models/user.model';
 import { BehaviorSubject, Observable, lastValueFrom } from 'rxjs';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -13,17 +14,20 @@ import { BehaviorSubject, Observable, lastValueFrom } from 'rxjs';
 })
 export class AppComponent implements OnInit{
 
-  currentLang: string;
-  user?: UserStrapi | null;
+  private _user:BehaviorSubject<any> = new BehaviorSubject<any>({});
+  public user$:Observable<any> = this._user.asObservable();
 
+  currentLang: string;
+  isMobile: boolean = false;
   constructor(public authSvc: BaseAuthenticationService,
     private router: Router,
     private languageService: LanguageService,
     public authService:BaseAuthenticationService,
     private usersSvc:UsersService,
+    private platform: Platform,
   ) {
     this.currentLang = this.languageService.getStoredLanguage();
-
+    this.isMobile = this.platform.is('ios') || this.platform.is('android');
     
   }
 
@@ -32,10 +36,10 @@ export class AppComponent implements OnInit{
       const userAuth = await this.authService.getCurrentUser();
       
       if(userAuth){
-        this.user = await lastValueFrom(this.usersSvc.getById(userAuth.id))
-        console.log(this.user,"user")
+        this._user.next(await lastValueFrom(this.usersSvc.getById(userAuth.id)))
+        
       }
-      console.log(this.user)
+      
     }catch(error){
       console.error(error);
     }

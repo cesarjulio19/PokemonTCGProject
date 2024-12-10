@@ -51,7 +51,7 @@ export class ProfilePage implements OnInit {
             username: this.user.username,
             email: this.user.email,
             picture: typeof this.user.picture === 'object' ? 
-                         this.user.picture?.url : 
+                         this.user.picture.url : 
                          undefined
           };
           

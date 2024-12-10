@@ -11,13 +11,14 @@ import { SearchSetSelectableComponent } from './components/search-set-selectable
 import { CardFormModalComponent } from './components/card-form-modal/card-form-modal.component';
 import { SetFormModalComponent } from './components/set-form-modal/set-form-modal.component';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { BlockButtonDirective } from './directives/block-button.directive';
 
 
 
 @NgModule({
   declarations: [SetSelectorComponent, CardModalComponent
     ,PictureSelectableComponent,PackModalComponent,SearchSetSelectableComponent,
-    CardFormModalComponent,SetFormModalComponent,CapitalizePipe
+    CardFormModalComponent,SetFormModalComponent,CapitalizePipe,BlockButtonDirective
   ],
   imports: [
     CommonModule,
@@ -28,7 +29,7 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
   ],
   exports: [SetSelectorComponent, CardModalComponent
     ,PictureSelectableComponent,PackModalComponent,SearchSetSelectableComponent,
-    CardFormModalComponent,SetFormModalComponent,CapitalizePipe
+    CardFormModalComponent,SetFormModalComponent,CapitalizePipe,BlockButtonDirective
   ]
 })
 export class SharedModule { }

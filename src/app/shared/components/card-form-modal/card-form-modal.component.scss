@@ -1,0 +1,63 @@
+.form-modal {
+    --background: none; /* Elimina colores predefinidos de Ionic */
+  background-image: url('/assets/images/fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+  
+  .image-card {
+    background-color: #fff8dc;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .styled-input ion-input,
+  .styled-input ion-select {
+    background-color: gray;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+  
+  .styled-input ion-input:focus,
+  .styled-input ion-select:focus {
+    border: 1px solid #4caf50;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+  }
+  
+  .form-footer {
+    background-color: #e8f5e9;
+    border-top: 1px solid #c8e6c9;
+  }
+  
+  .submit-btn {
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 5px;
+  }
+  
+  .submit-btn:disabled {
+    background-color: #c8c8c8;
+  }
+
+
+  ion-header {
+    --background: black; /* Cambia el color de fondo */
+    --color: #ffffff; /* Cambia el color del texto */
+  
+    ion-toolbar {
+      --background: black; /* También afecta el fondo del toolbar */
+      --color: #ffffff; /* Cambia el color del texto del título y botones */
+    }
+  }
+
+  ion-button {
+    --background: #4caf50;
+    --color: white;
+    --border-radius: 8px;
+    font-weight: bold;
+  }
+  

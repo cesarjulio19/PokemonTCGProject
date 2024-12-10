@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/core/models/auth.model';
 import { BaseAuthenticationService } from 'src/app/core/services/impl/base-authentication.service';
-import { PeopleService } from 'src/app/core/services/impl/people.service';
 import { passwordsMatchValidator, passwordValidator } from 'src/app/core/utils/validators';
 
 @Component({
@@ -22,8 +21,7 @@ export class RegisterPage {
     private authSvc:BaseAuthenticationService,
   ) {
     this.registerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      surname: ['', [Validators.required, Validators.minLength(2)]],
+      username: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, passwordValidator]],
       confirmPassword: ['', [Validators.required]]
@@ -51,18 +49,9 @@ export class RegisterPage {
     }
   }
 
-  onLogin(){
-    this.registerForm.reset();
-    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
-    this.router.navigate(['/login'], {queryParams:{ returnUrl:returnUrl}, replaceUrl:true});
-  }
 
-  get name(){
-    return this.registerForm.controls['name'];
-  }
-
-  get surname(){
-    return this.registerForm.controls['surname'];
+  get username(){
+    return this.registerForm.controls['username'];
   }
 
   get email(){

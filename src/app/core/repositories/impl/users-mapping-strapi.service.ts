@@ -47,8 +47,6 @@ interface UserRaw{
           picture: typeof data.image === 'object' ? {
             url: data.image?.url,
             small: data.image?.formats?.small?.url || data.image?.url,
-            medium: data.image?.formats?.medium?.url || data.image?.url,
-            large: data.image?.formats?.large?.url || data.image?.url,
             thumbnail: data.image?.formats?.small?.url || data.image?.url,
         } : undefined,
         };

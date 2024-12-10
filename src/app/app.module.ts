@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
-import { AUTH_ME_API_URL_TOKEN, AUTH_SIGN_IN_API_URL_TOKEN, AUTH_SIGN_UP_API_URL_TOKEN, BACKEND_TOKEN, CARDS_API_URL_TOKEN, CARDS_RESOURCE_NAME_TOKEN, GROUPS_API_URL_TOKEN, GROUPS_RESOURCE_NAME_TOKEN, MYCARDS_API_URL_TOKEN, MYCARDS_RESOURCE_NAME_TOKEN, PACKS_API_URL_TOKEN, PACKS_RESOURCE_NAME_TOKEN, PEOPLE_API_URL_TOKEN, PEOPLE_RESOURCE_NAME_TOKEN, SETS_API_URL_TOKEN, SETS_RESOURCE_NAME_TOKEN, UPLOAD_API_URL_TOKEN, USERS_API_URL_TOKEN, USERS_RESOURCE_NAME_TOKEN } from './core/repositories/repository.tokens';
+import { AUTH_ME_API_URL_TOKEN, AUTH_SIGN_IN_API_URL_TOKEN, AUTH_SIGN_UP_API_URL_TOKEN, BACKEND_TOKEN, CARDS_API_URL_TOKEN, CARDS_RESOURCE_NAME_TOKEN, MYCARDS_API_URL_TOKEN, MYCARDS_RESOURCE_NAME_TOKEN, PACKS_API_URL_TOKEN, PACKS_RESOURCE_NAME_TOKEN, SETS_API_URL_TOKEN, SETS_RESOURCE_NAME_TOKEN, UPLOAD_API_URL_TOKEN, USERS_API_URL_TOKEN, USERS_RESOURCE_NAME_TOKEN } from './core/repositories/repository.tokens';
 import { AuthMappingFactory, AuthenticationServiceFactory, CardsMappingFactory, CardsRepositoryFactory, MediaServiceFactory, MyCardsMappingFactory, MyCardsRepositoryFactory, PacksMappingFactory, PacksRepositoryFactory, SetsMappingFactory, SetsRepositoryFactory, UsersMappingFactory, UsersRepositoryFactory } from './core/repositories/repository.factory';
 import { SharedModule } from './shared/shared.module';
 import { CardsService } from './core/services/impl/cards.service';
@@ -19,6 +19,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MyCardsService } from './core/services/impl/mycards.service';
 import { PacksService } from './core/services/impl/packs.service';
 import { UsersService } from './core/services/impl/users.service';
+import { provideLottieOptions } from 'ngx-lottie';
+import player from 'lottie-web';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,6 +39,9 @@ export function createTranslateLoader(http: HttpClient) {
     }),
   ],
   providers: [ { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    provideLottieOptions({
+      player: () => player,
+    }),
     provideHttpClient(),
     { provide: BACKEND_TOKEN, useValue: 'strapi' },
     { provide: CARDS_RESOURCE_NAME_TOKEN, useValue: 'cards' },

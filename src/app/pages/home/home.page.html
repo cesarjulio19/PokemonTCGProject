@@ -9,4 +9,16 @@
 
 <ion-content [fullscreen]="true" style="background-image: url('/assets/images/PokemonTCG.jpg'); background-size: cover; background-position: center;">
 
+  <div class="home-container">
+    <div class="home-content">
+      <p>
+        <span>{{ 'HOME.TEXT1' | translate}}</span><br>
+        <span>{{ 'HOME.TEXT2' | translate}}</span>
+      </p>
+      <ion-button expand="block" routerLink="/packs" class="get-cards-button">
+        {{ 'HOME.BUTTON' | translate | capitalize}}
+      </ion-button>
+    </div>
+  </div>
+
 </ion-content>

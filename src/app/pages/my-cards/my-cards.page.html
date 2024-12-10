@@ -24,7 +24,7 @@
           <ion-img [src]="card.picture?.small" *ngIf="card.illustration && card.picture?.url"></ion-img>
           <ion-img [src]="card.picture?.small" *ngIf="!card.illustration && card.picture?.url" ></ion-img>
           <ion-img src="/assets/images/pokeball.png" *ngIf="!card.illustration && !card.picture?.url" ></ion-img>
-          <ion-button color="danger" (click)="onDeleteCard(card); $event.stopPropagation()">
+          <ion-button color="danger" (click)="onDeleteCard(card); $event.stopPropagation()" [appBlockButton]="isLoading">
             <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
           </ion-button>
         </ion-card>
@@ -51,7 +51,7 @@
           <ion-img [src]="card.picture?.small" *ngIf="card.illustration && card.picture?.url"></ion-img>
           <ion-img [src]="card.picture?.small" *ngIf="!card.illustration && card.picture?.url" ></ion-img>
           <ion-img src="/assets/images/pokeball.png" *ngIf="!card.illustration && !card.picture?.url" ></ion-img>
-          <ion-button color="danger" (click)="onDeleteCard(card); $event.stopPropagation()">
+          <ion-button color="danger" (click)="onDeleteCard(card); $event.stopPropagation() " [appBlockButton]="isLoading">
             <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
           </ion-button>
         </ion-card>

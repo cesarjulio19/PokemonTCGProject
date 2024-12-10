@@ -7,61 +7,56 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" scrollY="true">
-  <div class="register-container">
+<ion-content [fullscreen]="true" scrollY="true" >
+  <div class="register-container" >
+    <ion-card class="register-card">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <ion-grid>
+          <ion-row>
+            <ion-col class="ion-justify-content-center">
+              <ion-text class="card-title">
+                <h1>{{ 'REGISTER.NEW_ACCOUNT' | translate | capitalize }}</h1>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
     
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <ion-grid>
-        <ion-row>
-          <ion-col style="display:flex" class="ion-justify-content-center">
-            <ion-text><h1>{{ 'REGISTER.NEW_ACCOUNT' | translate | capitalize}}</h1></ion-text>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <ion-grid>
-        <ion-row>
-          <ion-col style="display:flex" class="ion-justify-content-center ion-align-items-center">
-            {{ 'REGISTER.ACCOUNT' | translate | capitalize}}<ion-button style="text-transform:none" (click)="onLogin()" fill="clear">{{ 'LOGIN.LOGIN' | translate | capitalize}}</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <ion-item>
-        <ion-input labelPlacement="floating" label="{{ 'USER.NAME' | translate | capitalize}}" type="text" formControlName="name" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input labelPlacement="floating" label="{{ 'USER.SURNAME' | translate | capitalize}}" type="text" formControlName="surname" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input labelPlacement="floating" label="{{ 'USER.EMAIL' | translate | capitalize}}" type="email" formControlName="email" autocomplete="off" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input labelPlacement="floating" label="{{ 'USER.PASSWORD' | translate | capitalize}}" type="password" formControlName="password" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input labelPlacement="floating" label="{{ 'USER.REPEAT_PASSWORD' | translate | capitalize}}" type="password" formControlName="confirmPassword" required></ion-input>
-      </ion-item>
-      <ion-text class="input-error" color="danger" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
-        <p *ngIf="name?.errors?.['required']">{{ 'REGISTER.ERRORS.NAME_REQUIRED' | translate | capitalize}}</p>
-        <p *ngIf="name?.errors?.['minlength']">{{ 'REGISTER.ERRORS.NAME_MIN_LENGTH' | translate | capitalize}}</p>
-      </ion-text>
-      <ion-text class="input-error" color="danger" *ngIf="surname?.invalid && (surname?.dirty || surname?.touched)">
-        <p *ngIf="surname?.errors?.['required']">{{ 'REGISTER.ERRORS.SURNAME_REQUIRED' | translate | capitalize}}</p>
-        <p *ngIf="surname?.errors?.['minlength']">{{ 'REGISTER.ERRORS.SURNAME_MIN_LENGTH' | translate | capitalize}}</p>
-      </ion-text>
-      <ion-text class="input-error" color="danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-        <p *ngIf="email?.errors?.['required']">{{ 'REGISTER.ERRORS.EMAIL_REQUIRED' | translate | capitalize}}</p>
-        <p *ngIf="email?.errors?.['email']">{{ 'REGISTER.ERRORS.EMAIL_INCORRECT' | translate | capitalize}}</p>
-      </ion-text>
-      <ion-text class="input-error" color="danger" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
-        <p *ngIf="password?.errors?.['required']">{{ 'REGISTER.ERRORS.PASSWORD_REQUIRED' | translate | capitalize}}</p>
-        <p *ngIf="password?.errors?.['passwordStrength']">{{ 'REGISTER.ERRORS.PASSWORD_INCORRECT' | translate | capitalize}}</p>
-      </ion-text>
-      <ion-text class="input-error" color="danger" *ngIf="registerForm.errors?.['passwordsMismatch']">
-        <p>{{ 'REGISTER.ERRORS.CONFIRM_PASSWORD' | translate | capitalize}}</p>
-      </ion-text>
-      <ion-button style="text-transform:none" expand="block" type="submit" [disabled]="registerForm.invalid">
-        {{ 'REGISTER.CREATE' | translate | capitalize}}
-      </ion-button>
-    </form>
+        
+    
+        <ion-item class="input-item">
+          <ion-input labelPlacement="floating" label="{{ 'REGISTER.USERNAME' | translate | capitalize }}" type="text" formControlName="username" required></ion-input>
+        </ion-item>
+        <ion-item class="input-item">
+          <ion-input labelPlacement="floating" label="{{ 'USER.EMAIL' | translate | capitalize }}" type="email" formControlName="email" autocomplete="off" required></ion-input>
+        </ion-item>
+        <ion-item class="input-item">
+          <ion-input labelPlacement="floating" label="{{ 'USER.PASSWORD' | translate | capitalize }}" type="password" formControlName="password" required></ion-input>
+        </ion-item>
+        <ion-item class="input-item">
+          <ion-input labelPlacement="floating" label="{{ 'USER.REPEAT_PASSWORD' | translate | capitalize }}" type="password" formControlName="confirmPassword" required></ion-input>
+        </ion-item>
+    
+        <ion-text class="input-error" color="danger" *ngIf="username?.invalid && (username?.dirty || username?.touched)">
+          <p *ngIf="username?.errors?.['required']">{{ 'REGISTER.ERRORS.NAME_REQUIRED' | translate | capitalize }}</p>
+          <p *ngIf="username?.errors?.['minlength']">{{ 'REGISTER.ERRORS.NAME_MIN_LENGTH' | translate | capitalize }}</p>
+        </ion-text>
+        <ion-text class="input-error" color="danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+          <p *ngIf="email?.errors?.['required']">{{ 'REGISTER.ERRORS.EMAIL_REQUIRED' | translate | capitalize }}</p>
+          <p *ngIf="email?.errors?.['email']">{{ 'REGISTER.ERRORS.EMAIL_INCORRECT' | translate | capitalize }}</p>
+        </ion-text>
+        <ion-text class="input-error" color="danger" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+          <p *ngIf="password?.errors?.['required']">{{ 'REGISTER.ERRORS.PASSWORD_REQUIRED' | translate | capitalize }}</p>
+          <p *ngIf="password?.errors?.['passwordStrength']">{{ 'REGISTER.ERRORS.PASSWORD_INCORRECT' | translate | capitalize }}</p>
+        </ion-text>
+        <ion-text class="input-error" color="danger" *ngIf="registerForm.errors?.['passwordsMismatch']">
+          <p>{{ 'REGISTER.ERRORS.CONFIRM_PASSWORD' | translate | capitalize }}</p>
+        </ion-text>
+    
+        <ion-button class="submit-btn" expand="block" type="submit" [disabled]="registerForm.invalid">
+          {{ 'REGISTER.CREATE' | translate | capitalize }}
+        </ion-button>
+      </form>
+    </ion-card>
+   
   </div>
 </ion-content>

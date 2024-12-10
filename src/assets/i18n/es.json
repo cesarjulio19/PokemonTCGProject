@@ -6,7 +6,8 @@
     "MYCARDS": "Mis Cartas",
     "LOGOUT": "Cerrar sesión",
     "PROFILE": "Perfil",
-    "PACKS": "Consigue cartas"
+    "PACKS": "Consigue cartas",
+    "ABOUT": "acerca de"
     },
 
     "MESSAGES": {
@@ -14,13 +15,13 @@
     },
 
     "LOGIN": {
-        "LOGIN": "Iniciar Sesión",
-        "REGISTER": "Regístrate",
+        "LOGIN": "iniciar sesión",
+        "REGISTER": "regístrate",
         "ACCOUNT": "¿No tienes cuenta?",
         "ERRORS": {
-            "EMAIL_REQUIRED": "*Debe introducir un email",
-            "EMAIL_INCORRECT": "*Debe introducir un email correcto",
-            "PASSWORD_REQUIRED": "*Debe introducir una contraseña"
+            "EMAIL_REQUIRED": "Debe introducir un email",
+            "EMAIL_INCORRECT": "Debe introducir un email correcto",
+            "PASSWORD_REQUIRED": "Debe introducir una contraseña"
         }
     
     },
@@ -39,16 +40,17 @@
         "CREATE": "Crear Cuenta",
         "ACCOUNT": "¿Tienes una cuenta?",
         "ERRORS": {
-            "NAME_REQUIRED": "*Debe introducir su nombre",
-            "NAME_MIN_LENGTH": "*El nombre debe tener al menos dos caracteres",
-            "SURNAME_REQUIRED": "*Debe introducir su/s apellido/s",
-            "SURNAME_MIN_LENGTH": "*Su/s apellido/s debe/n tener al menos dos caracteres",
-            "EMAIL_REQUIRED": "*Debe introducir un email",
-            "EMAIL_INCORRECT": "*Debe introducir un email correcto",
-            "PASSWORD_REQUIRED": "*Debe introducir una contraseña",
-            "PASSWORD_INCORRECT": "*Al menos 8 caracteres, una mayúscula, una minúscula, un dígito y un caracter especial (&#64;$!%*?&.)",
-            "CONFIRM_PASSWORD": "*Las contraseñas no coinciden"
-        }
+            "NAME_REQUIRED": "Debe introducir su nombre",
+            "NAME_MIN_LENGTH": "El nombre debe tener al menos dos caracteres",
+            "SURNAME_REQUIRED": "Debe introducir su/s apellido/s",
+            "SURNAME_MIN_LENGTH": "Su/s apellido/s debe/n tener al menos dos caracteres",
+            "EMAIL_REQUIRED": "Debe introducir un email",
+            "EMAIL_INCORRECT": "Debe introducir un email correcto",
+            "PASSWORD_REQUIRED": "Debe introducir una contraseña",
+            "PASSWORD_INCORRECT": "Al menos 8 caracteres, una mayúscula, una minúscula, un dígito y un caracter especial (&#64;$!%*?&.)",
+            "CONFIRM_PASSWORD": "Las contraseñas no coinciden"
+        },
+        "USERNAME": "nombre de usuario"
     },
 
     "SET_SELECTOR": {
@@ -78,11 +80,13 @@
         "EMAIL": "Email",
         "UPDATE": "Actualizar",
         "ERRORS":{
-            "USERNAME_REQUIRED": "*El nombre de usuario es obligatorio",
-            "USERNAME_MIN_LENGTH": "*El nombre de usuario debe tener al menos dos caracteres"
+            "USERNAME_REQUIRED": "El nombre de usuario es obligatorio",
+            "USERNAME_MIN_LENGTH": "El nombre de usuario debe tener al menos dos caracteres"
         },
         "SUCCESS_SAVE" : "El usuario se ha modificado correctamente",
-        "ERROR_SAVE" : "Error al modificar el usuario"
+        "ERROR_SAVE" : "Error al modificar el usuario",
+        "USERNAME_PLACEHOLDER": "Selecciona un username",
+        "EMAIL_PLACEHOLDER": "Selecciona un email"
 
     },
 
@@ -107,17 +111,19 @@
         "EDIT":"Editar carta",
         "NEW":"Nueva carta",
         "ERRORS":{
-            "NAME_REQUIRED": "*Nombre requerido",
-            "NAME_MIN_LENGTH": "*El nombre debe de tener al menos 2 caracteres",
-            "NUMBER_REQUIRED": "*Número requirido",
-            "TYPE_REQUIRED": "*Tipo requirido",
-            "RARITY_REQUIRED": "*Rareza requirida",
-            "SUPERTYPE_REQUIRED": "*Super tipo requirido",
+            "NAME_REQUIRED": "Nombre requerido",
+            "NAME_MIN_LENGTH": "El nombre debe de tener al menos 2 caracteres",
+            "NUMBER_REQUIRED": "Número requirido",
+            "TYPE_REQUIRED": "Tipo requirido",
+            "RARITY_REQUIRED": "Rareza requirida",
+            "SUPERTYPE_REQUIRED": "Super tipo requirido",
             "SET_REQUIRED": "*Colección requirida"
         },
         "TYPE_PLACEHOLDER": "Selecciona un tipo",
         "RARITY_PLACEHOLDER": "Selecciona una rareza",
         "SUPERTYPE_PLACEHOLDER": "Selecciona un super tipo",
+        "NAME_PLACEHOLDER": "Selecciona un nombre",
+        "NUMBER_PLACEHOLDER": "Selecciona un número",
         "DELETE": "¿Deseas borrar esta carta?"
 
 
@@ -126,7 +132,25 @@
     "SET":{
         "NEW":"Nueva colección",
         "UPDATE":"Modificar",
-        "CREATE":"Crear"
+        "CREATE":"Crear",
+        "EDIT":"editar colección",
+        "DELETE":"eliminar colección",
+        "DELETE_MESSAGE":"¿te gustaria eliminar esta colección?"
+    },
+
+    "HOME": {
+        "TEXT1": "Colecciona y abre sobres de cartas Pokémon.",
+        "TEXT2" : "¿Aún no tienes cartas?",
+        "BUTTON" :"conseguir cartas"
+    },
+
+    "ABOUT": {
+
+        "TEXT1": "Aplicación realizada por César Julio Martín González.",
+        "TEXT2": "Informate sobre todas las cartas de Pokemon TCG, abre sobres y aumenta tu colección de cartas.",
+        "TEXT3": "¿Aún no te has registrado?",
+        "BUTTON": "registrate ahora!"
+  
     }
 
     

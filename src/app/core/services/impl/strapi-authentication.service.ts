@@ -21,10 +21,9 @@ export class StrapiAuthenticationService extends BaseAuthenticationService imple
     @Inject(AUTH_ME_API_URL_TOKEN) protected meUrl: string,
     @Inject(AUTH_MAPPING_TOKEN) authMapping: IAuthMapping,
     private httpClient:HttpClient,
-    private usersSvc:UsersService,
   ) {
     super(authMapping);
-    this.jwt_token = localStorage.getItem('people-jwt-token');
+    this.jwt_token = localStorage.getItem('user-jwt-token');
     if (this.jwt_token) {
       this.me().subscribe({
         next:(resp) => {
@@ -36,11 +35,11 @@ export class StrapiAuthenticationService extends BaseAuthenticationService imple
           this._user.next(undefined);
         },
         complete:() => {
-          this._ready.next(true); // Completar inicialización
+          this._ready.next(true); 
         }
       });
     } else {
-      this._ready.next(true); // Completar inicialización
+      this._ready.next(true); 
     }
     
   }
@@ -54,44 +53,31 @@ export class StrapiAuthenticationService extends BaseAuthenticationService imple
   }
 
   signIn(authPayload: any): Observable<User> {
-     return this.httpClient.post<StrapiSignInResponse>(
+    return this.httpClient.post<StrapiSignInResponse>(
       `${this.signInUrl}`, 
-      this.authMapping.signInPayload(authPayload)).pipe(
-        switchMap(resp=>this.usersSvc.getById(resp.user.id.toString()).pipe(map(user=>{
-          const id = resp.user.id.toString()
-          localStorage.setItem("people-jwt-token",resp.jwt);
-          this.jwt_token = resp.jwt;
-          
-          this._authenticated.next(true);
-          this._user.next(this.authMapping.signIn(user));
-          const _user:User = {
-            id:user!.id,
-            email:user!.email,
-            username:user!.username,
-            admin:user!.admin,
-            picture:{...user!.picture},
-          }
-          return _user;
-      
-      }))));
+      this.authMapping.signInPayload(authPayload)).pipe(map((resp:StrapiSignInResponse)=>{
+      localStorage.setItem("user-jwt-token",resp.jwt);
+      this.jwt_token = resp.jwt;
+      this._authenticated.next(true);
+      this._user.next(this.authMapping.signIn(resp));
+      return this.authMapping.signIn(resp);
+    }));
   }
 
-  signUp(signUpPayload: any):  Observable<Promise<User>>  {
+  signUp(signUpPayload: any): Observable<User> {
     return this.httpClient.post<StrapiSignUpResponse>(
       `${this.signUpUrl}`, 
-      this.authMapping.signUpPayload(signUpPayload)).pipe(map(async (resp:StrapiSignUpResponse)=>{
-        const id = resp.user.id.toString()
-        const user = await this.usersSvc.getById(id);
-        localStorage.setItem("people-jwt-token",resp.jwt);
+      this.authMapping.signUpPayload(signUpPayload)).pipe(map((resp:StrapiSignUpResponse)=>{
+        localStorage.setItem("user-jwt-token",resp.jwt);
         this.jwt_token = resp.jwt;
         this._authenticated.next(true);
-        return this.authMapping.signUp(user);
+        return this.authMapping.signUp(resp);
       }));
   }
 
   signOut(): Observable<any> {
     return of(true).pipe(tap(_=>{
-      localStorage.removeItem('people-jwt-token');
+      localStorage.removeItem('user-jwt-token');
       this._authenticated.next(false);
       this._user.next(undefined);
     }));

@@ -1,50 +1,52 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      {{ 'SET.NEW' | translate | capitalize}}
+      {{ mode === 'edit' ? ('SET.EDIT' | translate | capitalize) : ('SET.NEW' | translate | capitalize) }}
     </ion-title>
-    @if (isMobile) {
-      <ion-buttons slot="end">
-        <ion-button (click)="dismiss()">
-          <ion-icon slot="icon-only" name="close"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    }
+    <ion-buttons slot="end" *ngIf="isMobile">
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content [fullscreen]="true">
-
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="12" size-md="4" class="ion-text-center">
-          <ion-card class="ion-no-margin">
-            <ion-card-content>
-              <app-picture-selectable formControlName="picture"></app-picture-selectable>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        
-        <ion-col size="12" size-md="8">
-          <ion-list>
-            <ion-item>
-              <ion-input [label]="'CARD.NAME' | translate" label-placement="stacked"  type="text" formControlName="name"></ion-input>
-            </ion-item>
-            <ion-text color="danger" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
-              <p *ngIf="name?.errors?.['required']">{{ 'CARD.ERRORS.NAME_REQUIRED' | translate | capitalize}}</p>
-              <p *ngIf="name?.errors?.['minlength']">{{ 'CARD.ERRORS.NAME_MIN_LENGTH' | translate | capitalize}}</p>
-            </ion-text>
-          </ion-list>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    
-    <div class="ion-padding">
-      <ion-button [disabled]="!formGroup.valid || !formGroup.dirty" expand="full" type="submit">
-        {{ 'SET.CREATE' | translate | capitalize}}
-      </ion-button>
+    <div class="form-container">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="12" class="ion-text-center">
+            <ion-card class="image-card">
+              <ion-card-content>
+                <app-picture-selectable formControlName="picture"></app-picture-selectable>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <!-- Campo de nombre -->
+      <ion-item class="input-item">
+        <ion-input
+          [label]="'CARD.NAME' | translate"
+          label-placement="floating"
+          type="text"
+          formControlName="name"
+          [placeholder]="'CARD.NAME_PLACEHOLDER' | translate"
+        ></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+        <p *ngIf="name?.errors?.['required']">{{ 'CARD.ERRORS.NAME_REQUIRED' | translate | capitalize }}</p>
+        <p *ngIf="name?.errors?.['minlength']">{{ 'CARD.ERRORS.NAME_MIN_LENGTH' | translate | capitalize }}</p>
+      </ion-text>
+
+      <!-- Botón de envío -->
+      <div class="submit-button">
+        <ion-button [disabled]="!formGroup.valid || !formGroup.dirty" expand="block" type="submit">
+          {{ mode === 'edit' ? ('SET.UPDATE' | translate | capitalize) : ('SET.CREATE' | translate | capitalize) }}
+        </ion-button>
+      </div>
     </div>
   </form>
 </ion-content>

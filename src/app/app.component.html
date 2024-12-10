@@ -1,6 +1,6 @@
 <ion-app>
   <!-- Menú -->
-  <ion-menu #menu contentId="main-content" side="start">
+  <ion-menu *ngIf="isMobile" #menu contentId="main-content" side="start">
     <ion-header>
       <ion-toolbar>
         <ion-title>{{ 'MENU.TITLE' | translate | capitalize}}</ion-title>
@@ -23,12 +23,21 @@
       <ion-list>
         <ion-item (click)="menu.close()"  *ngIf="(authSvc.authenticated$ | async)" routerLink="/profile" routerDirection="root">
           <ion-avatar>
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" *ngIf="(authService.user$ | async)?.picture?.url"/>
-            <img alt="Silhouette of a person's head" [src]="user?.picture?.url" *ngIf="user?.picture?.url"/>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" *ngIf="!(user$ | async).picture?.url"/>
+            <img alt="Silhouette of a person's head" [src]="(user$ | async).picture?.url" *ngIf="(user$ | async).picture?.url"/>
           </ion-avatar>
-          <p>{{user?.username}}</p>
+          <p>{{(authService.user$ | async)?.username}}</p>
         </ion-item>
-        <ion-item (click)="menu.close()" routerLink="/home" routerDirection="root">
+        <ion-item (click)="menu.close()" routerLink="/about" routerDirection="root" *ngIf="!(authSvc.authenticated$ | async)">
+          {{ 'MENU.ABOUT' | translate | capitalize}}
+        </ion-item>
+        <ion-item (click)="menu.close()" routerLink="/login" routerDirection="root" *ngIf="!(authSvc.authenticated$ | async)">
+          {{ 'LOGIN.LOGIN' | translate | capitalize}}
+        </ion-item>
+        <ion-item (click)="menu.close()" routerLink="/register" routerDirection="root" *ngIf="!(authSvc.authenticated$ | async)">
+          {{ 'LOGIN.REGISTER' | translate | capitalize}}
+        </ion-item>
+        <ion-item (click)="menu.close()" routerLink="/home" routerDirection="root" *ngIf="(authSvc.authenticated$ | async)">
           {{ 'MENU.HOME' | translate | capitalize}}
         </ion-item>
         <ion-item (click)="menu.close()"  *ngIf="(authSvc.authenticated$ | async)" routerLink="/cards" routerDirection="root">
@@ -41,11 +50,63 @@
           {{ 'MENU.PACKS' | translate | capitalize}}
         </ion-item>
         <ion-item (click)="menu.close()" *ngIf="(authSvc.authenticated$ | async)"  (click)="logout()" button>
+          <ion-icon name="log-out-outline" size="medium" color="danger"></ion-icon>
           {{ 'MENU.LOGOUT' | translate | capitalize}}
         </ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>
+
+    <!-- Barra superior para escritorio -->
+    <ion-header *ngIf="!isMobile" [translucent]="true">
+      <ion-toolbar>
+        <ion-title *ngIf="!(authSvc.authenticated$ | async)">Pokémon TCG</ion-title>
+          <ion-item  *ngIf="(authSvc.authenticated$ | async)" routerLink="/profile" routerDirection="root" class="avatar">
+            <ion-avatar>
+              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" *ngIf="!(user$ | async).picture?.url"/>
+              <img alt="Silhouette of a person's head" [src]="(user$ | async).picture?.url" *ngIf="(user$ | async).picture?.url"/>
+            </ion-avatar>
+            <p>{{(authService.user$ | async)?.username}}</p>
+          </ion-item>
+        
+        <ion-buttons slot="end">
+          <ion-button class="language">
+            <ion-item lines="none" class="language">
+              <ion-label>
+                <ion-icon name="language-outline" slot="start"></ion-icon>
+                @if(currentLang == 'es'){
+                  Español
+                }@else {
+                  English
+                }
+                
+              </ion-label>
+              <ion-select [value]="currentLang" interface="popover" (ionChange)="changeLanguage($event.detail.value)">
+                <ion-select-option value="es">ES</ion-select-option>
+                <ion-select-option value="en">EN</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+          </ion-button>
+          <ion-button routerLink="/about" routerLinkActive="selected"  *ngIf="!(authSvc.authenticated$ | async)">{{ 'MENU.ABOUT' | translate | capitalize }}</ion-button>
+          <ion-button routerLink="/login" routerLinkActive="selected"  *ngIf="!(authSvc.authenticated$ | async)">{{ 'LOGIN.LOGIN' | translate | capitalize }}</ion-button>
+          <ion-button routerLink="/register" routerLinkActive="selected"  *ngIf="!(authSvc.authenticated$ | async)">{{ 'LOGIN.REGISTER' | translate | capitalize }}</ion-button>
+          <ion-button routerLink="/home" routerLinkActive="selected"  *ngIf="(authSvc.authenticated$ | async)">{{ 'MENU.HOME' | translate | capitalize }}</ion-button>
+          <ion-button routerLink="/cards" *ngIf="(authSvc.authenticated$ | async)" routerLinkActive="selected">
+            {{ 'MENU.CARDS' | translate | capitalize }}
+          </ion-button>
+          <ion-button routerLink="/my-cards" *ngIf="(authSvc.authenticated$ | async)" routerLinkActive="selected">
+            {{ 'MENU.MYCARDS' | translate | capitalize }}
+          </ion-button>
+          <ion-button routerLink="/packs" *ngIf="(authSvc.authenticated$ | async)" routerLinkActive="selected">
+            {{ 'MENU.PACKS' | translate | capitalize }}
+          </ion-button>
+          <ion-button *ngIf="(authSvc.authenticated$ | async)" (click)="logout()" color="danger">
+            <ion-icon name="log-out-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
 
   <!-- Contenido principal -->
   <ion-router-outlet id="main-content"></ion-router-outlet>

@@ -44,7 +44,11 @@ const routes: Routes = [
     path: 'packs',
     canActivate: [authGuard],
     loadChildren: () => import('./pages/packs/packs.module').then( m => m.PacksPageModule)
+  },  {
+    path: 'about',
+    loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
   },
+
 
 
 

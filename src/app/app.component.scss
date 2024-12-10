@@ -1,5 +1,6 @@
 ion-toolbar {
     position: relative;
+    --background: none;
     
     ion-fab {
       position: absolute;
@@ -22,3 +23,34 @@ ion-toolbar {
       }
     }
   }
+
+
+  
+  ion-header {
+    --background: none;
+    background-color: black;
+    ion-buttons ion-button {
+      margin: 0 10px;
+    }
+  }
+
+  ion-button.selected {
+    --background: var(--ion-color-primary); /* Cambiar color de fondo */
+    --color: white; /* Cambiar color de texto */
+    border-radius: 8px; /* Opcional: personalizar bordes */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Opcional: sombra */
+  }
+
+.avatar{
+  width: 150px;
+  --background: none;
+  background-color: black;
+}
+
+.language{
+  --background: none;
+  background-color: black;
+}
+
+
+  

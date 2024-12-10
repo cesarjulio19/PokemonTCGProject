@@ -10,43 +10,55 @@
 <ion-content [fullscreen]="true">
 
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="12" size-md="4" class="ion-text-center">
-          <ion-card class="ion-no-margin">
-            <ion-card-content>
-              <app-picture-selectable formControlName="picture"></app-picture-selectable>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        
-        <ion-col size="12" size-md="8">
-          <ion-list>
-            <ion-item>
-              <ion-input [label]="'PROFILE.USERNAME' | translate | capitalize" label-placement="stacked"  type="text" formControlName="username"></ion-input>
+    <div class="form-container">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="12" class="ion-text-center">
+            <ion-card class="image-card">
+              <ion-card-content>
+                <app-picture-selectable formControlName="picture"></app-picture-selectable>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <!-- Campo de usernombre -->
+      <ion-item class="input-item">
+        <ion-input
+          [label]="'PROFILE.USERNAME' | translate"
+          label-placement="floating"
+          type="text"
+          formControlName="username"
+          [placeholder]="'PROFILE.USERNAME_PLACEHOLDER' | translate"
+        ></ion-input>
+      </ion-item>
+
+            <!-- Campo de email -->
+            <ion-item class="input-item">
+              <ion-input
+                [label]="'PROFILE.EMAIL' | translate"
+                label-placement="floating"
+                type="email"
+                formControlName="email"
+                [placeholder]="'PROFILE.EMAIL_PLACEHOLDER' | translate"
+              ></ion-input>
             </ion-item>
             <ion-text color="danger" *ngIf="username?.invalid && (username?.dirty || username?.touched)">
-              <p *ngIf="username?.errors?.['required']">{{ 'PROFILE.ERRORS.USERNAME_REQUIRED' | translate | capitalize}}</p>
-              <p *ngIf="username?.errors?.['minlength']">{{ 'PROFILE.ERRORS.USERNAME_MIN_LENGTH' | translate | capitalize}}</p>
+              <p *ngIf="username?.errors?.['required']">{{ 'PROFILE.ERRORS.USERNAME_REQUIRED' | translate | capitalize }}</p>
+              <p *ngIf="username?.errors?.['minlength']">{{ 'PROFILE.ERRORS.USERNAME_MIN_LENGTH' | translate | capitalize }}</p>
+            </ion-text>
+            <ion-text class="input-error" color="danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+              <p *ngIf="email?.errors?.['required']">{{ 'REGISTER.ERRORS.EMAIL_REQUIRED' | translate | capitalize }}</p>
+              <p *ngIf="email?.errors?.['email']">{{ 'REGISTER.ERRORS.EMAIL_INCORRECT' | translate | capitalize }}</p>
             </ion-text>
 
-            <!-- Email -->
-            <ion-item>
-              <ion-input [label]="'PROFILE.EMAIL' | translate" label-placement="stacked" type="email" formControlName="email"></ion-input>
-            </ion-item>
-            <ion-text color="danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-              <p *ngIf="email?.errors?.['required']">{{ 'REGISTER.ERRORS.EMAIL_REQUIRED' | translate | capitalize}}</p>
-              <p *ngIf="email?.errors?.['email']">{{ 'REGISTER.ERRORS.EMAIL_INCORRECT' | translate | capitalize}}</p>
-            </ion-text>
-          </ion-list>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    
-    <div class="ion-padding">
-      <ion-button [disabled]="!formGroup.valid || !formGroup.dirty" expand="full" type="submit">
-        {{ 'PROFILE.UPDATE' | translate | capitalize}}
-      </ion-button>
+      <!-- Botón de envío -->
+      <div class="submit-button">
+        <ion-button [disabled]="!formGroup.valid || !formGroup.dirty" expand="block" type="submit">
+          {{ "PROFILE.UPDATE" | translate | capitalize}}
+        </ion-button>
+      </div>
     </div>
   </form>
 </ion-content>

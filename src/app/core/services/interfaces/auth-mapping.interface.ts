@@ -1,5 +1,5 @@
 import { SignInPayload, SignUpPayload, User } from "../../models/auth.model";
-import { Person } from "../../models/person.model";
+
 
 export interface IAuthMapping{
     signInPayload(payload:SignInPayload):any;

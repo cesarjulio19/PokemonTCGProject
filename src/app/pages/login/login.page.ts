@@ -41,11 +41,7 @@ export class LoginPage {
     }
   }
 
-  onRegister(){
-    this.loginForm.reset();
-    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
-    this.router.navigate(['/register'], {queryParams:{ returnUrl:returnUrl}, replaceUrl:true});
-  }
+
 
   onForgotPassword(){
 

@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ 'MENU.ABOUT' | translate | capitalize}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" style="background-image: url('/assets/images/PokemonTCG.jpg'); background-size: cover; background-position: center;">
+
+  <div class="home-container">
+    <div class="home-content">
+      <p>
+        <span>{{ 'ABOUT.TEXT1' | translate}}</span><br>
+        <span>{{ 'ABOUT.TEXT2' | translate}}</span>
+        <span>{{ 'ABOUT.TEXT3' | translate}}</span>
+      </p>
+      <ion-button expand="block" routerLink="/register" class="get-cards-button">
+        {{ 'ABOUT.BUTTON' | translate | capitalize}}
+      </ion-button>
+    </div>
+  </div>
+
+</ion-content>

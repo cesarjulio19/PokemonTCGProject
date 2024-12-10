@@ -33,6 +33,7 @@ export class MyCardsPage implements OnInit {
   mycards:MyCard[] = [];
   user:any
   isMobile: boolean = false;
+  isLoading: boolean = false;
   constructor(private mycardsSvc:MyCardsService,
     private cardsSvc:CardsService,
     private authService:BaseAuthenticationService,
@@ -149,6 +150,13 @@ export class MyCardsPage implements OnInit {
     }
 
   async onDeleteCard(card: Card) {
+
+    this.isLoading = true;
+
+    setTimeout(() => {
+      this.isLoading = false;
+      console.log('Operation completed');
+    }, 3000);
     
     this.mycardsSvc.getByCardId(card.id, this.user.id).subscribe({
       next: async (response: MyCard | null) => {

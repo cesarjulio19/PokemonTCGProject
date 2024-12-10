@@ -57,6 +57,7 @@ export class PacksPage implements OnInit {
   pack:Pack | undefined
   user:any
   isopen:boolean = false
+  isLoading = false;
   async ngOnInit() {
 
     try{
@@ -116,9 +117,18 @@ export class PacksPage implements OnInit {
 
 
   }
- //mirar
+ 
   onSetSelected(selectedSetId: string){
     this.selectedSetId = selectedSetId
+
+    this.setsSvc.getAll( ).subscribe({
+      next: (response: Set[]) => {
+        this._sets.next(response);
+      },
+      error: (err) => {
+        console.error('Error al obtener los conjuntos:', err);
+      }
+    });
 
 
     if(this.selectedSetId != "-1"){
@@ -259,6 +269,14 @@ export class PacksPage implements OnInit {
   }
 
   openPack(){
+    this.isLoading = true;
+
+    setTimeout(() => {
+      this.isLoading = false;
+      console.log('Operation completed');
+    }, 3000);
+
+    
 
     this.getRandomCards(this.cards$).subscribe({
       next: (randomCards: Card[]) =>{

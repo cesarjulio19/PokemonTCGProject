@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { Card } from 'src/app/core/models/card.model';
 
 @Component({
@@ -9,7 +9,12 @@ import { Card } from 'src/app/core/models/card.model';
 })
 export class CardModalComponent  implements OnInit {
 
-  constructor(private modalCtrl: ModalController) { }
+  isMobile: boolean = false;
+  constructor(private modalCtrl: ModalController,
+    private platform: Platform
+  ) { 
+    this.isMobile = this.platform.is('ios') || this.platform.is('android');
+  }
 
   @Input() card!: Card;
 

@@ -74,7 +74,7 @@ export interface GroupRaw {
         return {
             email:payload.email,
             password:payload.password,
-            username:payload.name + " "+ payload.surname
+            username:payload.username 
 
         };
     }
@@ -84,8 +84,6 @@ export interface GroupRaw {
             id:response.user.id.toString(),
             username:response.user.username,
             email:response.user.email,
-            //picture:response.user.image
-            admin:response.user.adminRole
         };
     }
     signUp(response: StrapiSignUpResponse): User {
@@ -93,7 +91,6 @@ export interface GroupRaw {
             id:response.user.id.toString(),
             username:response.user.username,
             email:response.user.email,
-            admin:response.user.adminRole
         };
     }
 
@@ -102,7 +99,6 @@ export interface GroupRaw {
             id:response.id.toString(),
             username:response.username,
             email:response.email,
-            admin:response.adminRole
 
         };
     }

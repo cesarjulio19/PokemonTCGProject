@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController, Platform } from '@ionic/angular';
+import { Set } from 'src/app/core/models/set.model';
 
 @Component({
   selector: 'app-set-form-modal',
@@ -11,6 +12,15 @@ export class SetFormModalComponent  implements OnInit {
 
   formGroup:FormGroup;
   isMobile: boolean = false;
+  mode:'new'|'edit' = 'new';
+
+  @Input() set set(_set:Set){
+    if(_set && _set.id)
+      this.mode = 'edit';
+    
+      this.formGroup.controls['name'].setValue(_set.name);
+      this.formGroup.controls['picture'].setValue(_set.picture?.url);
+  }
 
   
   constructor(private fb:FormBuilder,
@@ -38,15 +48,19 @@ export class SetFormModalComponent  implements OnInit {
     return dirtyValues;
   }
 
-  onSubmit() {
+  onSubmit(){
     if (this.formGroup.valid) {
-      const formValues = this.getDirtyValues(this.formGroup); 
-      this.modalCtrl.dismiss(formValues);
+      this.modalCtrl.dismiss(
+          (this.mode=='new'?
+            this.formGroup.value:
+            this.getDirtyValues(this.formGroup)), this.mode
+      );
     } else {
       console.log('Formulario inválido');
     }
-  }
 
+  }
+  
   dismiss() {
     this.modalCtrl.dismiss();
   }

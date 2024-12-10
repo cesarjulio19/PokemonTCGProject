@@ -6,7 +6,8 @@
     "MYCARDS": "My Cards",
     "LOGOUT": "Logout",
     "PROFILE": "Profile",
-    "PACKS": "Get cards"
+    "PACKS": "Get cards",
+    "ABOUT": "about"
   },
 
   "MESSAGES": {
@@ -14,13 +15,13 @@
   },
 
   "LOGIN": {
-    "LOGIN": "Login",
-    "REGISTER": "Register",
+    "LOGIN": "login",
+    "REGISTER": "register",
     "ACCOUNT": "Don't have an account?",
     "ERRORS": {
-        "EMAIL_REQUIRED": "*You must enter an email",
-        "EMAIL_INCORRECT": "*You must enter a correct email",
-        "PASSWORD_REQUIRED": "*You must enter a password"
+        "EMAIL_REQUIRED": "You must enter an email",
+        "EMAIL_INCORRECT": "You must enter a correct email",
+        "PASSWORD_REQUIRED": "You must enter a password"
     }
 
   },
@@ -39,16 +40,17 @@
     "CREATE": "Create Account",
     "ACCOUNT": "Do you have an account?",
     "ERRORS": {
-        "NAME_REQUIRED": "*You must enter your name",
-        "NAME_MIN_LENGTH": "*The name must be at least two characters",
-        "SURNAME_REQUIRED": "*Surname is required",
+        "NAME_REQUIRED": "You must enter your name",
+        "NAME_MIN_LENGTH": "The name must be at least two characters",
+        "SURNAME_REQUIRED": "Surname is required",
         "SURNAME_MIN_LENGTH": "Surname must be at least 2 characters long",
-        "EMAIL_REQUIRED": "*You must enter a correct email",
-        "EMAIL_INCORRECT": "*You must enter a correct email",
-        "PASSWORD_REQUIRED": "*You must enter a password",
-        "PASSWORD_INCORRECT": "*At least 8 characters, one uppercase letter, one lowercase letter, one digit and one special character (&#64;$!%*?&.)",
-        "CONFIRM_PASSWORD": "*Passwords do not match"
-    }
+        "EMAIL_REQUIRED": "You must enter a correct email",
+        "EMAIL_INCORRECT": "You must enter a correct email",
+        "PASSWORD_REQUIRED": "You must enter a password",
+        "PASSWORD_INCORRECT": "At least 8 characters, one uppercase letter, one lowercase letter, one digit and one special character (&#64;$!%*?&.)",
+        "CONFIRM_PASSWORD": "Passwords do not match"
+    },
+    "USERNAME": "username"
 },
 
 "SET_SELECTOR": {
@@ -77,12 +79,13 @@
   "EMAIL": "Email",
   "UPDATE": "Update",
   "ERRORS":{
-    "USERNAME_REQUIRED": "*Username is required",
-    "USERNAME_MIN_LENGTH": "*The username must be at least two characters"
+    "USERNAME_REQUIRED": "Username is required",
+    "USERNAME_MIN_LENGTH": "The username must be at least two characters"
   },
   "SUCCESS_SAVE" : "The user has been successfully modified",
-  "ERROR_SAVE" : "Error modifying user"
-
+  "ERROR_SAVE" : "Error modifying user",
+  "USERNAME_PLACEHOLDER": "Select a username",
+  "EMAIL_PLACEHOLDER": "Select a email"
 },
 
 "PACK":{
@@ -106,18 +109,20 @@
   "EDIT":"Edit card",
   "NEW":"new card",
   "ERRORS":{
-    "NAME_REQUIRED": "*Name required",
-    "NAME_MIN_LENGTH": "*The name must be at least two characters",
-    "NUMBER_REQUIRED": "*Number required",
-    "TYPE_REQUIRED": "*Type required",
-    "RARITY_REQUIRED": "*Rarity required",
-    "SUPERTYPE_REQUIRED": "*Super type required",
-    "SET_REQUIRED": "*Set required"
+    "NAME_REQUIRED": "Name required",
+    "NAME_MIN_LENGTH": "The name must be at least two characters",
+    "NUMBER_REQUIRED": "Number required",
+    "TYPE_REQUIRED": "Type required",
+    "RARITY_REQUIRED": "Rarity required",
+    "SUPERTYPE_REQUIRED": "Super type required",
+    "SET_REQUIRED": "Set required"
   },
 
   "TYPE_PLACEHOLDER": "Select a type",
   "RARITY_PLACEHOLDER": "Select a rarity",
   "SUPERTYPE_PLACEHOLDER": "Select a super type",
+  "NAME_PLACEHOLDER": "Select a name",
+  "NUMBER_PLACEHOLDER": "Select a number",
   "DELETE": "Do you want to delete this card?"
 
 
@@ -126,8 +131,30 @@
 "SET":{
   "NEW":"new set",
   "UPDATE":"Update",
-  "CREATE":"Create"
+  "CREATE":"Create",
+  "EDIT":"edit set",
+  "DELETE":"delete set",
+  "DELETE_MESSAGE":"do you want to delete this set?"
+},
+
+"HOME": {
+  "TEXT1": "Collect and open packs of Pokémon cards.",
+  "TEXT2" : "Don't you have any cards yet?",
+  "BUTTON" :"get cards"
+},
+
+"ABOUT": {
+
+  "TEXT1": "Application made by César Julio Martín González.",
+  "TEXT2": "Find out about all the Pokémon TCG cards, open packs and increase your card collection.",
+  "TEXT3": "Haven't you registered yet?",
+  "BUTTON": "register now!"
+
 }
+
+
+
+
 
 
 
